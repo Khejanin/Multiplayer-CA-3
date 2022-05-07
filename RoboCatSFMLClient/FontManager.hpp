@@ -5,13 +5,13 @@ public:
 
 	static std::unique_ptr<FontManager> sInstance;
 
-	FontPtr GetFont(const string& p_fontName);
+	FontPtr GetFont(const EFonts& p_fontName);
 
 private:
 	FontManager();
 
-	bool CacheFont(string inName, const char* inFileName);
+	bool CacheFont(EFonts inName, const char* inFileName);
 
-	unordered_map< string, FontPtr >	mNameToFontMap;
+	unordered_map< EFonts, FontPtr >	mNameToFontMap;
 };
 

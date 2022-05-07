@@ -8,12 +8,10 @@ RenderManager::RenderManager()
 	WindowManager::sInstance->setView(view);
 }
 
-
 void RenderManager::StaticInit()
 {
 	sInstance.reset(new RenderManager());
 }
-
 
 void RenderManager::AddComponent(SpriteComponent* inComponent)
 {
@@ -67,14 +65,17 @@ void RenderManager::Render()
 	// Clear the back buffer
 	//
 	WindowManager::sInstance->clear(sf::Color(100, 149, 237, 255));
+	WindowManager::SetDefaultView();
 
+	StateStack::sInstance->Draw();
+
+	/* Comment out
 	RenderManager::sInstance->RenderComponents();
 
 	HUD::sInstance->Render();
-
+	*/
 	//
 	// Present our back buffer to our front buffer
 	//
 	WindowManager::sInstance->display();
-
 }

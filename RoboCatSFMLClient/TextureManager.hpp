@@ -5,13 +5,14 @@ public:
 
 	static std::unique_ptr<TextureManager>		sInstance;
 
-	TexturePtr	GetTexture(const string& inTextureName);
+	TexturePtr	GetTexture(const ETextures& inTextureName);
 
 private:
 	TextureManager();
 
-	bool CacheTexture(string inName, const char* inFileName);
+	bool CacheTexture(ETextures inName, const char* inFileName);
+	bool CacheTexture(ETextures inTextureName, const char* inFileName, sf::IntRect area);
 
-	unordered_map< string, TexturePtr >	mNameToTextureMap;
+	unordered_map< ETextures, TexturePtr >	mNameToTextureMap;
 };
 

@@ -26,6 +26,7 @@ const int SOCKET_ERROR = -1;
 
 
 #include "memory"
+#include "random"
 
 #include "vector"
 #include "unordered_map"
@@ -34,6 +35,7 @@ const int SOCKET_ERROR = -1;
 #include "queue"
 #include "deque"
 #include "unordered_set"
+#include "functional"
 #include "cassert"
 
 using std::shared_ptr;

@@ -34,7 +34,6 @@ Timing::Timing()
 
 void Timing::Update()
 {
-
 	double currentTime = GetTime();
 
 	mDeltaTime = (float)(currentTime - mLastFrameStartTime);

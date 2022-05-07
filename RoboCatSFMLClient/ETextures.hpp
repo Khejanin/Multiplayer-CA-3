@@ -1,0 +1,22 @@
+enum class ETextures
+{
+	kLocalTank,
+	kEnemyTank,
+	kEagle,
+	kRaptor,
+	kAvenger,
+	kBackground,
+	kBullet,
+	kMissile,
+	kExplosiveShots,
+	kHealthRefill,
+	kAmmoRefill,
+	kFireSpread,
+	kFireRate,
+	kTitleScreen,
+	kButtonNormal,
+	kButtonSelected,
+	kButtonPressed,
+	kParticle,
+	kExplosion
+};

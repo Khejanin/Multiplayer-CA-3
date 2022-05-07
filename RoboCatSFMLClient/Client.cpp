@@ -1,5 +1,7 @@
 #include "RoboCatClientPCH.hpp"
 
+std::unique_ptr<Client> Client::s_instance;
+
 bool Client::StaticInit()
 {
 	// Create the Client pointer first because it initializes SDL
@@ -10,44 +12,38 @@ bool Client::StaticInit()
 	FontManager::StaticInit();
 	TextureManager::StaticInit();
 	RenderManager::StaticInit();
-	
 
+	StateStack::StaticInit();
 	HUD::StaticInit();
 
 	s_instance.reset(client);
+
+	RegisterStates();
+
+	StateStack::sInstance->PushState(EState::kTitle);
 
 	return true;
 }
 
 Client::Client()
 {
-	GameObjectRegistry::sInstance->RegisterCreationFunction('RCAT', RoboCatClient::StaticCreate);
-	GameObjectRegistry::sInstance->RegisterCreationFunction('MOUS', MouseClient::StaticCreate);
-	GameObjectRegistry::sInstance->RegisterCreationFunction('YARN', YarnClient::StaticCreate);
-
-	string destination = StringUtils::GetCommandLineArg(1);
-	string name = StringUtils::GetCommandLineArg(2);
-
-	SocketAddressPtr serverAddress = SocketAddressFactory::CreateIPv4FromString(destination);
-
-	NetworkManagerClient::StaticInit(*serverAddress, name);
-
-	//NetworkManagerClient::sInstance->SetSimulatedLatency(0.0f);
 }
-
-
 
 void Client::DoFrame()
 {
+	StateStack::sInstance->Update(Timing::sInstance.GetDeltaTime());
+
 	InputManager::sInstance->Update();
 
 	Engine::DoFrame();
 
-	NetworkManagerClient::sInstance->ProcessIncomingPackets();
+	if(is_connected)
+		NetworkManagerClient::sInstance->ProcessIncomingPackets();
 
 	RenderManager::sInstance->Render();
 
-	NetworkManagerClient::sInstance->SendOutgoingPackets();
+	if(is_connected)
+		NetworkManagerClient::sInstance->SendOutgoingPackets();
 }
 
 void Client::HandleEvent(sf::Event& p_event)
@@ -63,6 +59,8 @@ void Client::HandleEvent(sf::Event& p_event)
 	default:
 		break;
 	}
+
+	StateStack::sInstance->HandleEvent(p_event);
 }
 
 bool Client::PollEvent(sf::Event& p_event)
@@ -70,4 +68,29 @@ bool Client::PollEvent(sf::Event& p_event)
 	return WindowManager::sInstance->pollEvent(p_event);
 }
 
+void Client::EstablishConnection()
+{
+	GameObjectRegistry::sInstance->RegisterCreationFunction('RCAT', RoboCatClient::StaticCreate);
+	GameObjectRegistry::sInstance->RegisterCreationFunction('MOUS', MouseClient::StaticCreate);
+	GameObjectRegistry::sInstance->RegisterCreationFunction('YARN', YarnClient::StaticCreate);
 
+	string destination = StringUtils::GetCommandLineArg(1);
+	string name = StringUtils::GetCommandLineArg(2);
+
+	SocketAddressPtr serverAddress = SocketAddressFactory::CreateIPv4FromString(destination);
+
+	NetworkManagerClient::StaticInit(*serverAddress, name);
+
+	is_connected = true;
+}
+
+void Client::CloseConnection()
+{
+	is_connected = false;
+}
+
+void Client::RegisterStates()
+{
+	StateStack::sInstance->RegisterState<TitleState>(EState::kTitle);
+	StateStack::sInstance->RegisterState<MenuState>(EState::kMenu);
+}

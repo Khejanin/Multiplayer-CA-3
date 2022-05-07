@@ -1,4 +1,5 @@
-typedef shared_ptr< sf::Texture > TexturePtr;
+typedef shared_ptr<sf::Texture> TexturePtr;
+typedef shared_ptr<sf::SoundBuffer> SoundPtr;
 typedef shared_ptr<sf::Font> FontPtr;
 
 class SpriteComponent

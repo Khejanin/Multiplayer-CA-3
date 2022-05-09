@@ -2,7 +2,6 @@
 
 GameObject::GameObject() :
 	mIndexInWorld(-1),
-	mCollisionRadius(1.f),
 	mDoesWantToDie(false),
 	mRotation(0.f),
 	mNetworkId(0),
@@ -16,6 +15,11 @@ void GameObject::Update()
 	//object don't do anything by default...	
 }
 
+
+sf::FloatRect GameObject::GetBounds()
+{
+	return sf::FloatRect(mPosition.mX - mSize.mX / 2.f * mScale, mPosition.mY - mSize.mY / 2.f * mScale, mSize.mX * mScale, mSize.mY * mScale);
+}
 
 Vector3 GameObject::GetForwardVector()	const
 {

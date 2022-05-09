@@ -1,6 +1,6 @@
 #include "RoboCatClientPCH.hpp"
 
-RoboCatClient::RoboCatClient() :
+TankClient::TankClient() :
 	mTimeLocationBecameOutOfSync(0.f),
 	mTimeVelocityBecameOutOfSync(0.f)
 {
@@ -8,19 +8,8 @@ RoboCatClient::RoboCatClient() :
 	mSpriteComponent->SetTexture(TextureManager::sInstance->GetTexture(ETextures::kTank));
 }
 
-void RoboCatClient::HandleDying()
-{
-	RoboCat::HandleDying();
 
-	//and if we're local, tell the hud so our health goes away!
-	if (GetPlayerId() == NetworkManagerClient::sInstance->GetPlayerId())
-	{
-		HUD::sInstance->SetPlayerHealth(0);
-	}
-}
-
-
-void RoboCatClient::Update()
+void TankClient::Update()
 {
 	//is this the cat owned by us?
 	if (GetPlayerId() == NetworkManagerClient::sInstance->GetPlayerId())
@@ -54,7 +43,18 @@ void RoboCatClient::Update()
 	}
 }
 
-void RoboCatClient::Read(InputMemoryBitStream& inInputStream)
+void TankClient::HandleDying()
+{
+	Tank::HandleDying();
+
+	//and if we're local, tell the hud so our health goes away!
+	if (GetPlayerId() == NetworkManagerClient::sInstance->GetPlayerId())
+	{
+		HUD::sInstance->SetPlayerHealth(0);
+	}
+}
+
+void TankClient::Read(InputMemoryBitStream& inInputStream)
 {
 	bool stateBit;
 
@@ -66,7 +66,7 @@ void RoboCatClient::Read(InputMemoryBitStream& inInputStream)
 		uint32_t playerId;
 		inInputStream.Read(playerId);
 		SetPlayerId(playerId);
-		readState |= ECRS_PlayerId;
+		readState |= ETRS_PlayerId;
 	}
 
 	float oldRotation = GetRotation();
@@ -93,19 +93,11 @@ void RoboCatClient::Read(InputMemoryBitStream& inInputStream)
 		inInputStream.Read(replicatedRotation);
 		SetRotation(replicatedRotation);
 
-		readState |= ECRS_Pose;
+		readState |= ETRS_Pose;
 	}
 
 	inInputStream.Read(stateBit);
-	if (stateBit)
-	{
-		inInputStream.Read(stateBit);
-		mThrustDir = stateBit ? 1.f : -1.f;
-	}
-	else
-	{
-		mThrustDir = 0.f;
-	}
+	mIsThrusting = stateBit;
 
 	inInputStream.Read(stateBit);
 	if (stateBit)
@@ -113,7 +105,7 @@ void RoboCatClient::Read(InputMemoryBitStream& inInputStream)
 		Vector3 color;
 		inInputStream.Read(color);
 		SetColor(color);
-		readState |= ECRS_Color;
+		readState |= ETRS_Color;
 	}
 
 	inInputStream.Read(stateBit);
@@ -121,31 +113,31 @@ void RoboCatClient::Read(InputMemoryBitStream& inInputStream)
 	{
 		mHealth = 0;
 		inInputStream.Read(mHealth, 4);
-		readState |= ECRS_Health;
+		readState |= ETRS_Health;
 	}
 
 	if (GetPlayerId() == NetworkManagerClient::sInstance->GetPlayerId())
 	{
 		//did we get health? if so, tell the hud!
-		if ((readState & ECRS_Health) != 0)
+		if ((readState & ETRS_Health) != 0)
 		{
 			HUD::sInstance->SetPlayerHealth(mHealth);
 		}
 
-		DoClientSidePredictionAfterReplicationForLocalCat(readState);
+		DoClientSidePredictionAfterReplicationForLocalTank(readState);
 
 		//if this is a create packet, don't interpolate
-		if ((readState & ECRS_PlayerId) == 0)
+		if ((readState & ETRS_PlayerId) == 0)
 		{
 			InterpolateClientSidePrediction(oldRotation, oldLocation, oldVelocity, false);
 		}
 	}
 	else
 	{
-		DoClientSidePredictionAfterReplicationForRemoteCat(readState);
+		DoClientSidePredictionAfterReplicationForRemoteTank(readState);
 
 		//will this smooth us out too? it'll interpolate us just 10% of the way there...
-		if ((readState & ECRS_PlayerId) == 0)
+		if ((readState & ETRS_PlayerId) == 0)
 		{
 			InterpolateClientSidePrediction(oldRotation, oldLocation, oldVelocity, true);
 		}
@@ -153,9 +145,10 @@ void RoboCatClient::Read(InputMemoryBitStream& inInputStream)
 	}
 }
 
-void RoboCatClient::DoClientSidePredictionAfterReplicationForLocalCat(uint32_t inReadState)
+
+void TankClient::DoClientSidePredictionAfterReplicationForLocalTank(uint32_t inReadState)
 {
-	if ((inReadState & ECRS_Pose) != 0)
+	if ((inReadState & ETRS_Pose) != 0)
 	{
 		//simulate pose only if we received new pose- might have just gotten thrustDir
 		//in which case we don't need to replay moves because we haven't warped backwards
@@ -175,7 +168,7 @@ void RoboCatClient::DoClientSidePredictionAfterReplicationForLocalCat(uint32_t i
 }
 
 
-void RoboCatClient::InterpolateClientSidePrediction(float inOldRotation, const Vector3 & inOldLocation, const Vector3 & inOldVelocity, bool inIsForRemoteCat)
+void TankClient::InterpolateClientSidePrediction(float inOldRotation, const Vector3& inOldLocation, const Vector3& inOldVelocity, bool inIsForRemoteCat)
 {
 	if (inOldRotation != GetRotation() && !inIsForRemoteCat)
 	{
@@ -239,9 +232,9 @@ void RoboCatClient::InterpolateClientSidePrediction(float inOldRotation, const V
 
 //so what do we want to do here? need to do some kind of interpolation...
 
-void RoboCatClient::DoClientSidePredictionAfterReplicationForRemoteCat(uint32_t inReadState)
+void TankClient::DoClientSidePredictionAfterReplicationForRemoteTank(uint32_t inReadState)
 {
-	if ((inReadState & ECRS_Pose) != 0)
+	if ((inReadState & ETRS_Pose) != 0)
 	{
 
 		//simulate movement for an additional RTT

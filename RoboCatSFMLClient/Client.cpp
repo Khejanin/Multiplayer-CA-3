@@ -12,6 +12,7 @@ bool Client::StaticInit()
 	FontManager::StaticInit();
 	TextureManager::StaticInit();
 	RenderManager::StaticInit();
+	SoundManager::StaticInit();
 
 	StateStack::StaticInit();
 	HUD::StaticInit();
@@ -34,8 +35,6 @@ void Client::DoFrame()
 	StateStack::sInstance->Update(Timing::sInstance.GetDeltaTime());
 
 	InputManager::sInstance->Update();
-
-	Engine::DoFrame();
 
 	if(is_connected)
 		NetworkManagerClient::sInstance->ProcessIncomingPackets();
@@ -73,6 +72,7 @@ void Client::EstablishConnection()
 	GameObjectRegistry::sInstance->RegisterCreationFunction('RCAT', RoboCatClient::StaticCreate);
 	GameObjectRegistry::sInstance->RegisterCreationFunction('MOUS', MouseClient::StaticCreate);
 	GameObjectRegistry::sInstance->RegisterCreationFunction('YARN', YarnClient::StaticCreate);
+	GameObjectRegistry::sInstance->RegisterCreationFunction('TANK', TankClient::StaticCreate);
 
 	string destination = StringUtils::GetCommandLineArg(1);
 	string name = StringUtils::GetCommandLineArg(2);
@@ -93,4 +93,5 @@ void Client::RegisterStates()
 {
 	StateStack::sInstance->RegisterState<TitleState>(EState::kTitle);
 	StateStack::sInstance->RegisterState<MenuState>(EState::kMenu);
+	StateStack::sInstance->RegisterState<MultiplayerGameState>(EState::kJoinGame);
 }

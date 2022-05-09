@@ -4,7 +4,7 @@
 YarnClient::YarnClient()
 {
 	mSpriteComponent.reset(new SpriteComponent(this));
-	mSpriteComponent->SetTexture(TextureManager::sInstance->GetTexture(ETextures::kLocalTank));
+	mSpriteComponent->SetTexture(TextureManager::sInstance->GetTexture(ETextures::kTank));
 }
 
 
@@ -18,7 +18,7 @@ void YarnClient::Read(InputMemoryBitStream& inInputStream)
 		Vector3 location;
 		inInputStream.Read(location.mX);
 		inInputStream.Read(location.mY);
-		SetLocation(location);
+		SetPosition(location);
 
 		Vector3 velocity;
 		inInputStream.Read(velocity.mX);

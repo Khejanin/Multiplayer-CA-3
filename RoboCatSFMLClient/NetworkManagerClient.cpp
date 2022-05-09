@@ -99,8 +99,6 @@ void NetworkManagerClient::HandleWelcomePacket(InputMemoryBitStream& inInputStre
 	}
 }
 
-
-
 void NetworkManagerClient::HandleStatePacket(InputMemoryBitStream& inInputStream)
 {
 	if (mState == NCS_Welcomed)

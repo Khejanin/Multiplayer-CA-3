@@ -40,7 +40,6 @@ bool InputState::Write(OutputMemoryBitStream& inOutputStream) const
 
 bool InputState::Read(InputMemoryBitStream& inInputStream)
 {
-
 	ReadSignedBinaryValue(inInputStream, mDesiredRightAmount);
 	ReadSignedBinaryValue(inInputStream, mDesiredForwardAmount);
 	inInputStream.Read(mIsShooting);

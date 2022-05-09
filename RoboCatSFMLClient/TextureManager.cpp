@@ -21,17 +21,16 @@ TextureManager::TextureManager()
 	//GAME
 	
 	//Tanks
-	CacheTexture(ETextures::kLocalTank, "../Assets/Textures/Tanx.png", sf::IntRect(1, 12, 10, 10));
-	CacheTexture(ETextures::kEnemyTank, "../Assets/Textures/Tanx.png", sf::IntRect(1, 34, 10, 10));
+	CacheTexture(ETextures::kTank, "../Assets/Textures/Tanx2.png", sf::IntRect(1, 12, 10, 10));
 	//Background
-	CacheTexture(ETextures::kBackground, "../Assets/Textures/Tanx.png", sf::IntRect(88, 44, 10, 10));
+	CacheTexture(ETextures::kBackground, "../Assets/Textures/Tanx2.png", sf::IntRect(88, 44, 10, 10));
 	//Pickups
 	CacheTexture(ETextures::kHealthRefill, "../Assets/Textures/HealthRefill.png");
 	CacheTexture(ETextures::kAmmoRefill, "../Assets/Textures/FireSpread.png");
 	CacheTexture(ETextures::kExplosiveShots, "../Assets/Textures/MissileRefill.png");
 	CacheTexture(ETextures::kFireRate, "../Assets/Textures/FireRate.png");
 	//Projectiles
-	CacheTexture(ETextures::kBullet, "../Assets/Textures/Bullet.png");
+	CacheTexture(ETextures::kBullet, "../Assets/Textures/Bullet2.png");
 	CacheTexture(ETextures::kMissile, "../Assets/Textures/Missile.png");
 	//FX
 	CacheTexture(ETextures::kExplosion, "../Assets/Textures/Explosion.png");

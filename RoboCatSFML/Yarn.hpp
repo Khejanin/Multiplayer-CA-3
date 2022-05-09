@@ -4,7 +4,7 @@ public:
 
 	CLASS_IDENTIFICATION('YARN', GameObject)
 
-		enum EYarnReplicationState
+	enum EYarnReplicationState
 	{
 		EYRS_Pose = 1 << 0,
 		EYRS_Color = 1 << 1,
@@ -29,7 +29,7 @@ public:
 
 	virtual void Update() override;
 
-	virtual bool HandleCollisionWithCat(RoboCat* inCat) override;
+	virtual bool HandleCollisionWithDynamicGameObject(DynamicGameObject* inCat) override;
 
 protected:
 	Yarn();

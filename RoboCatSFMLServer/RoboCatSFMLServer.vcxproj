@@ -155,6 +155,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="ProjectileServer.hpp" />
     <ClInclude Include="ClientProxy.hpp" />
     <ClInclude Include="MouseServer.hpp" />
     <ClInclude Include="NetworkManagerServer.hpp" />
@@ -163,9 +164,11 @@
     <ClInclude Include="RoboCatServer.hpp" />
     <ClInclude Include="RoboCatServerPCH.hpp" />
     <ClInclude Include="Server.hpp" />
+    <ClInclude Include="TankServer.hpp" />
     <ClInclude Include="YarnServer.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="ProjectileServer.cpp" />
     <ClCompile Include="ClientProxy.cpp" />
     <ClCompile Include="MouseServer.cpp" />
     <ClCompile Include="NetworkManagerServer.cpp" />
@@ -180,6 +183,7 @@
     </ClCompile>
     <ClCompile Include="Server.cpp" />
     <ClCompile Include="ServerMain.cpp" />
+    <ClCompile Include="TankServer.cpp" />
     <ClCompile Include="YarnServer.cpp" />
   </ItemGroup>
   <ItemGroup>

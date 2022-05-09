@@ -11,12 +11,12 @@ void MouseServer::HandleDying()
 }
 
 
-bool MouseServer::HandleCollisionWithCat(RoboCat* inCat)
+bool MouseServer::HandleCollisionWithDynamicGameObject(DynamicGameObject* inCat)
 {
 	//kill yourself!
 	SetDoesWantToDie(true);
 
-	ScoreBoardManager::sInstance->IncScore(inCat->GetPlayerId(), 1);
+	//ScoreBoardManager::sInstance->IncScore(inCat->GetPlayerId(), 1);
 
 	return false;
 }

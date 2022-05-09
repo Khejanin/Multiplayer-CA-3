@@ -3,5 +3,5 @@
 MouseClient::MouseClient()
 {
 	mSpriteComponent.reset(new SpriteComponent(this));
-	mSpriteComponent->SetTexture(TextureManager::sInstance->GetTexture(ETextures::kLocalTank));
+	mSpriteComponent->SetTexture(TextureManager::sInstance->GetTexture(ETextures::kTank));
 }

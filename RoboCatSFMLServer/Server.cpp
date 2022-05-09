@@ -19,6 +19,7 @@ Server::Server()
 	GameObjectRegistry::sInstance->RegisterCreationFunction('RCAT', RoboCatServer::StaticCreate);
 	GameObjectRegistry::sInstance->RegisterCreationFunction('MOUS', MouseServer::StaticCreate);
 	GameObjectRegistry::sInstance->RegisterCreationFunction('YARN', YarnServer::StaticCreate);
+	GameObjectRegistry::sInstance->RegisterCreationFunction('TANK', TankServer::StaticCreate);
 
 	InitNetworkManager();
 
@@ -63,7 +64,7 @@ namespace
 		{
 			go = GameObjectRegistry::sInstance->CreateGameObject('MOUS');
 			Vector3 mouseLocation = RoboMath::GetRandomVector(mouseMin, mouseMax);
-			go->SetLocation(mouseLocation);
+			go->SetPosition(mouseLocation);
 		}
 	}
 
@@ -74,7 +75,7 @@ namespace
 void Server::SetupWorld()
 {
 	//spawn some random mice
-	CreateRandomMice(10);
+	//CreateRandomMice(10);
 
 	//spawn more random mice!
 	//CreateRandomMice(10);
@@ -100,16 +101,16 @@ void Server::HandleNewClient(ClientProxyPtr inClientProxy)
 	int playerId = inClientProxy->GetPlayerId();
 
 	ScoreBoardManager::sInstance->AddEntry(playerId, inClientProxy->GetName());
-	SpawnCatForPlayer(playerId);
+	SpawnTankForPlayer(playerId);
 }
 
-void Server::SpawnCatForPlayer(int inPlayerId)
+void Server::SpawnTankForPlayer(int inPlayerId)
 {
-	RoboCatPtr cat = std::static_pointer_cast<RoboCat>(GameObjectRegistry::sInstance->CreateGameObject('RCAT'));
-	cat->SetColor(ScoreBoardManager::sInstance->GetEntry(inPlayerId)->GetColor());
-	cat->SetPlayerId(inPlayerId);
+	TankPtr tank = std::static_pointer_cast<Tank>(GameObjectRegistry::sInstance->CreateGameObject('TANK'));
+	tank->SetColor(ScoreBoardManager::sInstance->GetEntry(inPlayerId)->GetColor());
+	tank->SetPlayerId(inPlayerId);
 	//gotta pick a better spawn location than this...
-	cat->SetLocation(Vector3(600.f - static_cast<float>(inPlayerId), 400.f, 0.f));
+	tank->SetPosition(Vector3(600.f - static_cast<float>(inPlayerId), 400.f, 0.f));
 }
 
 void Server::HandleLostClient(ClientProxyPtr inClientProxy)
@@ -119,14 +120,14 @@ void Server::HandleLostClient(ClientProxyPtr inClientProxy)
 	int playerId = inClientProxy->GetPlayerId();
 
 	ScoreBoardManager::sInstance->RemoveEntry(playerId);
-	RoboCatPtr cat = GetCatForPlayer(playerId);
-	if (cat)
+	TankPtr tank = GetTankForPlayer(playerId);
+	if (tank)
 	{
-		cat->SetDoesWantToDie(true);
+		tank->SetDoesWantToDie(true);
 	}
 }
 
-RoboCatPtr Server::GetCatForPlayer(int inPlayerId)
+TankPtr Server::GetTankForPlayer(int inPlayerId)
 {
 	//run through the objects till we find the cat...
 	//it would be nice if we kept a pointer to the cat on the clientproxy
@@ -136,10 +137,13 @@ RoboCatPtr Server::GetCatForPlayer(int inPlayerId)
 	for (int i = 0, c = gameObjects.size(); i < c; ++i)
 	{
 		GameObjectPtr go = gameObjects[i];
-		RoboCat* cat = go->GetAsCat();
-		if (cat && cat->GetPlayerId() == inPlayerId)
+		if(go->GetClassId() == 'TANK')
 		{
-			return std::static_pointer_cast<RoboCat>(go);
+			Tank* tank = static_cast<Tank*>(go.get());
+			if (tank->GetPlayerId() == inPlayerId)
+			{
+				return std::static_pointer_cast<Tank>(go);
+			}
 		}
 	}
 

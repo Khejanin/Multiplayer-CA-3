@@ -3,11 +3,11 @@
 Mouse::Mouse()
 {
 	SetScale(GetScale() * 0.5f);
-	SetCollisionRadius(20.f);
+	SetSize(Vector3(50, 50, 0));
 }
 
 
-bool Mouse::HandleCollisionWithCat(RoboCat* inCat)
+bool Mouse::HandleCollisionWithDynamicGameObject(DynamicGameObject* inCat)
 {
 	(void)inCat;
 	return false;
@@ -22,7 +22,7 @@ uint32_t Mouse::Write(OutputMemoryBitStream& inOutputStream, uint32_t inDirtySta
 	{
 		inOutputStream.Write((bool)true);
 
-		Vector3 location = GetLocation();
+		Vector3 location = GetPosition();
 		inOutputStream.Write(location.mX);
 		inOutputStream.Write(location.mY);
 
@@ -62,7 +62,7 @@ void Mouse::Read(InputMemoryBitStream& inInputStream)
 		Vector3 location;
 		inInputStream.Read(location.mX);
 		inInputStream.Read(location.mY);
-		SetLocation(location);
+		SetPosition(location);
 
 		float rotation;
 		inInputStream.Read(rotation);
@@ -78,5 +78,3 @@ void Mouse::Read(InputMemoryBitStream& inInputStream)
 		SetColor(color);
 	}
 }
-
-

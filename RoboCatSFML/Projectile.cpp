@@ -1,20 +1,18 @@
 #include "RoboCatPCH.hpp"
 
-Yarn::Yarn() :
+Projectile::Projectile() :
 	mMuzzleSpeed(300.f),
 	mVelocity(Vector3::Zero),
 	mPlayerId(0)
 {
-	SetScale(GetScale() * 0.25f);
-	SetSize(Vector3(20, 20, 0));
+	SetSize(Vector3(3, 14, 0));
 }
 
-
-uint32_t Yarn::Write(OutputMemoryBitStream& inOutputStream, uint32_t inDirtyState) const
+uint32_t Projectile::Write(OutputMemoryBitStream& inOutputStream, uint32_t inDirtyState) const
 {
 	uint32_t writtenState = 0;
 
-	if (inDirtyState & EYRS_Pose)
+	if (inDirtyState & EPRS_Pose)
 	{
 		inOutputStream.Write((bool)true);
 
@@ -28,33 +26,33 @@ uint32_t Yarn::Write(OutputMemoryBitStream& inOutputStream, uint32_t inDirtyStat
 
 		inOutputStream.Write(GetRotation());
 
-		writtenState |= EYRS_Pose;
+		writtenState |= EPRS_Pose;
 	}
 	else
 	{
 		inOutputStream.Write((bool)false);
 	}
 
-	if (inDirtyState & EYRS_Color)
+	if (inDirtyState & EPRS_Color)
 	{
 		inOutputStream.Write((bool)true);
 
 		inOutputStream.Write(GetColor());
 
-		writtenState |= EYRS_Color;
+		writtenState |= EPRS_Color;
 	}
 	else
 	{
 		inOutputStream.Write((bool)false);
 	}
 
-	if (inDirtyState & EYRS_PlayerId)
+	if (inDirtyState & EPRS_PlayerId)
 	{
 		inOutputStream.Write((bool)true);
 
 		inOutputStream.Write(mPlayerId, 8);
 
-		writtenState |= EYRS_PlayerId;
+		writtenState |= EPRS_PlayerId;
 	}
 	else
 	{
@@ -63,17 +61,7 @@ uint32_t Yarn::Write(OutputMemoryBitStream& inOutputStream, uint32_t inDirtyStat
 	return writtenState;
 }
 
-
-bool Yarn::HandleCollisionWithDynamicGameObject(DynamicGameObject* inCat)
-{
-	(void)inCat;
-
-	//you hit a cat, so look like you hit a cat
-	return false;
-}
-
-
-void Yarn::InitFromShooter(RoboCat* inShooter)
+void Projectile::InitFromShooter(Tank* inShooter)
 {
 	SetColor(inShooter->GetColor());
 	SetPlayerId(inShooter->GetPlayerId());
@@ -85,12 +73,18 @@ void Yarn::InitFromShooter(RoboCat* inShooter)
 	SetRotation(inShooter->GetRotation());
 }
 
-void Yarn::Update()
+void Projectile::Update()
 {
 	float deltaTime = Timing::sInstance.GetDeltaTime();
 
 	SetPosition(GetPosition() + mVelocity * deltaTime);
 
+	//we'll let the tanks handle the collisions
+}
 
-	//we'll let the cats handle the collisions
+bool Projectile::HandleCollisionWithDynamicGameObject(DynamicGameObject* inDynGo)
+{
+	(void)inDynGo;
+
+	return false;
 }

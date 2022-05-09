@@ -43,7 +43,6 @@ void NetworkManager::ProcessIncomingPackets()
 	ProcessQueuedPackets();
 
 	UpdateBytesSentLastFrame();
-
 }
 
 void NetworkManager::ReadIncomingPacketsIntoQueue()

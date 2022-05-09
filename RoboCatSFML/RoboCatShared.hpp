@@ -49,7 +49,12 @@ using std::string;
 using std::unordered_set;
 
 class RoboCat;
+class Tank;
 class GameObject;
+class DynamicGameObject;
+
+const float WORLD_WIDTH = 900;
+const float WORLD_HEIGHT = 800;
 
 #include "SFML\System.hpp"
 #include "SFML\Window.hpp"
@@ -81,11 +86,14 @@ class GameObject;
 
 #include "GameObject.hpp"
 #include "GameObjectRegistry.hpp"
+#include "DynamicGameObject.hpp"
 #include "RoboCat.hpp"
+#include "Tank.hpp"
 #include "World.hpp"
 #include "Timing.hpp"
 #include "Mouse.hpp"
 #include "Yarn.hpp"
+#include "Projectile.hpp"
 #include "StringUtils.hpp"
 #include "ScoreBoardManager.hpp"
 

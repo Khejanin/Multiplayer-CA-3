@@ -1,22 +1,22 @@
-class RoboCat : public DynamicGameObject
+class Tank : public DynamicGameObject
 {
 public:
-	CLASS_IDENTIFICATION('RCAT', GameObject)
+	CLASS_IDENTIFICATION('TANK', GameObject)
 
-	enum ECatReplicationState
+	enum ETankReplicationState
 	{
-		ECRS_Pose = 1 << 0,
-		ECRS_Color = 1 << 1,
-		ECRS_PlayerId = 1 << 2,
-		ECRS_Health = 1 << 3,
+		ETRS_Pose = 1 << 0,
+		ETRS_Color = 1 << 1,
+		ETRS_PlayerId = 1 << 2,
+		ETRS_Health = 1 << 3,
 
-		ECRS_AllState = ECRS_Pose | ECRS_Color | ECRS_PlayerId | ECRS_Health
+		ETRS_AllState = ETRS_Pose | ETRS_Color | ETRS_PlayerId | ETRS_Health
 	};
 
 
-	static	GameObject* StaticCreate() { return new RoboCat(); }
+	static	GameObject* StaticCreate() { return new Tank(); }
 
-	virtual uint32_t GetAllStateMask()	const override { return ECRS_AllState; }
+	virtual uint32_t GetAllStateMask()	const override { return ETRS_AllState; }
 
 	virtual void Update() override;
 
@@ -32,7 +32,7 @@ public:
 	virtual uint32_t	Write(OutputMemoryBitStream& inOutputStream, uint32_t inDirtyState) const override;
 
 protected:
-	RoboCat();
+	Tank();
 
 private:
 
@@ -43,7 +43,6 @@ private:
 
 
 	float				mMaxLinearSpeed;
-	float				mMaxRotationSpeed;
 
 	//bounce fraction when hitting various things
 	float				mWallRestitution;
@@ -58,11 +57,10 @@ protected:
 
 	float				mLastMoveTimestamp;
 
-	float				mThrustDir;
+	bool				mIsThrusting;
 	int					mHealth;
 
 	bool				mIsShooting;
 };
 
-typedef shared_ptr< RoboCat >	RoboCatPtr;
-
+typedef shared_ptr< Tank >	TankPtr;

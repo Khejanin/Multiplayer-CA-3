@@ -4,7 +4,7 @@ std::unique_ptr<sf::RenderWindow>	WindowManager::sInstance;
 
 bool WindowManager::StaticInit()
 {
-	sInstance.reset(new sf::RenderWindow(sf::VideoMode(900, 800), "Tanx!", sf::Style::Close));
+	sInstance.reset(new sf::RenderWindow(sf::VideoMode(WORLD_WIDTH, WORLD_HEIGHT), "Tanx!", sf::Style::Close));
 	sInstance->setKeyRepeatEnabled(false);
 	return true;
 }

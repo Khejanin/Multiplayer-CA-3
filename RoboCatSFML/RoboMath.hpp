@@ -203,3 +203,11 @@ namespace Colors
 	static const Vector3 LightGreen(142.8f, 237.15f, 142.8f);
 }
 
+enum Direction
+{
+	None,
+	Up,
+	Down,
+	Left,
+	Right
+};

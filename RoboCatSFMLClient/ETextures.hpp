@@ -1,6 +1,6 @@
 enum class ETextures
 {
-	kLocalTank,
+	kTank,
 	kEnemyTank,
 	kEagle,
 	kRaptor,

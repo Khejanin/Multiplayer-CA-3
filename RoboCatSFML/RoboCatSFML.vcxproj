@@ -154,6 +154,7 @@
     <ClInclude Include="AckRange.hpp" />
     <ClInclude Include="ByteSwap.hpp" />
     <ClInclude Include="DeliveryNotificationManager.hpp" />
+    <ClInclude Include="DynamicGameObject.hpp" />
     <ClInclude Include="Engine.hpp" />
     <ClInclude Include="GameObject.hpp" />
     <ClInclude Include="GameObjectRegistry.hpp" />
@@ -166,6 +167,7 @@
     <ClInclude Include="Move.hpp" />
     <ClInclude Include="MoveList.hpp" />
     <ClInclude Include="NetworkManager.hpp" />
+    <ClInclude Include="Projectile.hpp" />
     <ClInclude Include="ReplicationCommand.hpp" />
     <ClInclude Include="RoboCat.hpp" />
     <ClInclude Include="RoboCatPCH.hpp" />
@@ -176,6 +178,7 @@
     <ClInclude Include="SocketAddressFactory.hpp" />
     <ClInclude Include="SocketUtil.hpp" />
     <ClInclude Include="StringUtils.hpp" />
+    <ClInclude Include="Tank.hpp" />
     <ClInclude Include="TCPSocket.hpp" />
     <ClInclude Include="Timing.hpp" />
     <ClInclude Include="TransmissionData.hpp" />
@@ -187,6 +190,7 @@
   <ItemGroup>
     <ClCompile Include="AckRange.cpp" />
     <ClCompile Include="DeliveryNotificationManager.cpp" />
+    <ClCompile Include="DynamicGameObject.cpp" />
     <ClCompile Include="Engine.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GameObjectRegistry.cpp" />
@@ -197,6 +201,7 @@
     <ClCompile Include="Move.cpp" />
     <ClCompile Include="MoveList.cpp" />
     <ClCompile Include="NetworkManager.cpp" />
+    <ClCompile Include="Projectile.cpp" />
     <ClCompile Include="RoboCat.cpp" />
     <ClCompile Include="RoboCatPCH.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
@@ -210,6 +215,7 @@
     <ClCompile Include="SocketAddressFactory.cpp" />
     <ClCompile Include="SocketUtil.cpp" />
     <ClCompile Include="StringUtils.cpp" />
+    <ClCompile Include="Tank.cpp" />
     <ClCompile Include="TCPSocket.cpp" />
     <ClCompile Include="Timing.cpp" />
     <ClCompile Include="UDPSocket.cpp" />

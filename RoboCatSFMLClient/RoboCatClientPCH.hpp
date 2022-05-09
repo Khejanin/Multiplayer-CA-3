@@ -3,7 +3,6 @@
 #include "SFML\Graphics.hpp"
 
 #include "sstream"
-#include "corecrt_math_defines.h"
 
 #include "Animation.hpp"
 //Utility depends on Animation
@@ -28,6 +27,7 @@
 #include "RoboCatClient.hpp"
 #include "MouseClient.hpp"
 #include "YarnClient.hpp"
+#include "TankClient.hpp"
 
 #include "HUD.hpp"
 
@@ -42,6 +42,7 @@
 
 #include "TitleState.hpp"
 #include "MenuState.hpp"
+#include "MultiplayerGameState.hpp"
 
 #include "ReplicationManagerClient.hpp"
 #include "NetworkManagerClient.hpp"

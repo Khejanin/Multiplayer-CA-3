@@ -42,6 +42,12 @@
     <ClInclude Include="ReplicationManagerTransmissionData.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="TankServer.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ProjectileServer.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ClientProxy.cpp">
@@ -72,6 +78,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ReplicationManagerTransmissionData.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TankServer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ProjectileServer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

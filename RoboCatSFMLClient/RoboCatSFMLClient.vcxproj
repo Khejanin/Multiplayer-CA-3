@@ -32,6 +32,7 @@
     <ClInclude Include="InputManager.hpp" />
     <ClInclude Include="MenuState.hpp" />
     <ClInclude Include="MouseClient.hpp" />
+    <ClInclude Include="MultiplayerGameState.hpp" />
     <ClInclude Include="NetworkManagerClient.hpp" />
     <ClInclude Include="PlayerSpriteComponent.hpp" />
     <ClInclude Include="RenderManager.hpp" />
@@ -43,6 +44,7 @@
     <ClInclude Include="SpriteComponent.hpp" />
     <ClInclude Include="State.hpp" />
     <ClInclude Include="StateStack.hpp" />
+    <ClInclude Include="TankClient.hpp" />
     <ClInclude Include="TextureManager.hpp" />
     <ClInclude Include="ETextures.hpp" />
     <ClInclude Include="TitleState.hpp" />
@@ -62,6 +64,7 @@
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="MenuState.cpp" />
     <ClCompile Include="MouseClient.cpp" />
+    <ClCompile Include="MultiplayerGameState.cpp" />
     <ClCompile Include="NetworkManagerClient.cpp" />
     <ClCompile Include="PlayerSpriteComponent.cpp" />
     <ClCompile Include="RenderManager.cpp" />
@@ -77,6 +80,7 @@
     <ClCompile Include="SpriteComponent.cpp" />
     <ClCompile Include="State.cpp" />
     <ClCompile Include="StateStack.cpp" />
+    <ClCompile Include="TankClient.cpp" />
     <ClCompile Include="TextureManager.cpp" />
     <ClCompile Include="TitleState.cpp" />
     <ClCompile Include="Utility.cpp" />

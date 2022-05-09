@@ -25,7 +25,7 @@ void SpriteComponent::SetTexture(TexturePtr inTexture)
 sf::Sprite& SpriteComponent::GetSprite()
 {
 	// Update the sprite based on the game object stuff.
-	auto pos = mGameObject->GetLocation();
+	auto pos = mGameObject->GetPosition();
 	auto rot = mGameObject->GetRotation();
 	m_sprite.setPosition(pos.mX, pos.mY);
 	m_sprite.setRotation(rot);

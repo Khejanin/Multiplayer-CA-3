@@ -1,5 +1,4 @@
 #include "RoboCatClientPCH.hpp"
-#define _USE_MATH_DEFINES
 
 namespace
 {
@@ -158,11 +157,6 @@ std::string Utility::toString(sf::Keyboard::Key key)
 	return "";
 }
 
-double Utility::ToRadians(int degrees)
-{
-	return (degrees * M_PI) / 180;
-}
-
 sf::Vector2f Utility::UnitVector(sf::Vector2f vector)
 {
 	assert(vector != sf::Vector2f(0.f, 0.f));
@@ -172,11 +166,6 @@ sf::Vector2f Utility::UnitVector(sf::Vector2f vector)
 float Utility::Length(sf::Vector2f vector)
 {
 	return sqrtf(powf(vector.x, 2) + powf(vector.y, 2));
-}
-
-float Utility::ToDegrees(float angle_in_radians)
-{
-	return angle_in_radians * (180/M_PI);
 }
 
 int Utility::RandomInt(int exclusiveMax)

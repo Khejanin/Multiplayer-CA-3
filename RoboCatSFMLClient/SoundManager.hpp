@@ -19,6 +19,6 @@ private:
 	bool CacheSound(ESounds inName, const char* inFileName);
 
 	unordered_map< ESounds, SoundPtr >	mNameToTextureMap;
-	std::list<sf::Sound> m_sounds;
+	list<sf::Sound> m_sounds;
 };
 

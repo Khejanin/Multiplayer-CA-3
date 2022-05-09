@@ -15,7 +15,7 @@ void RoboCatServer::Update()
 {
 	RoboCat::Update();
 
-	Vector3 oldLocation = GetLocation();
+	Vector3 oldLocation = GetPosition();
 	Vector3 oldVelocity = GetVelocity();
 	float oldRotation = GetRotation();
 
@@ -52,7 +52,7 @@ void RoboCatServer::Update()
 
 	HandleShooting();
 
-	if (!RoboMath::Is2DVectorEqual(oldLocation, GetLocation()) ||
+	if (!RoboMath::Is2DVectorEqual(oldLocation, GetPosition()) ||
 		!RoboMath::Is2DVectorEqual(oldVelocity, GetVelocity()) ||
 		oldRotation != GetRotation())
 	{
@@ -89,7 +89,7 @@ void RoboCatServer::TakeDamage(int inDamagingPlayerId)
 		ClientProxyPtr clientProxy = NetworkManagerServer::sInstance->GetClientProxy(GetPlayerId());
 		if (clientProxy)
 		{
-			clientProxy->HandleCatDied();
+			clientProxy->HandlePlayerDied();
 		}
 	}
 

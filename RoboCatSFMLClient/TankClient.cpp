@@ -4,7 +4,7 @@ TankClient::TankClient() :
 	mTimeLocationBecameOutOfSync(0.f),
 	mTimeVelocityBecameOutOfSync(0.f)
 {
-	mSpriteComponent.reset(new PlayerSpriteComponent(this));
+	mSpriteComponent.reset(new SpriteComponent(this));
 	mSpriteComponent->SetTexture(TextureManager::sInstance->GetTexture(ETextures::kTank));
 }
 

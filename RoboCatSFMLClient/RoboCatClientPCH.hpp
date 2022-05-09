@@ -28,6 +28,7 @@
 #include "MouseClient.hpp"
 #include "YarnClient.hpp"
 #include "TankClient.hpp"
+#include "ProjectileClient.hpp"
 
 #include "HUD.hpp"
 

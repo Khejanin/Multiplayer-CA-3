@@ -21,10 +21,11 @@ void Tank::Update()
 
 void Tank::ProcessInput(float inDeltaTime, const InputState& inInputState)
 {
-	auto mAccDir = Vector3(inInputState.GetDesiredHorizontalDelta(), inInputState.GetDesiredVerticalDelta(), 0);
+	auto accDir = Vector3(inInputState.GetDesiredHorizontalDelta(), -inInputState.GetDesiredVerticalDelta(), 0);
 	mIsShooting = inInputState.IsShooting();
-	mIsThrusting = mAccDir.Length() > 0;
-	SetRotation(RoboMath::ToDegrees(std::atan2(mAccDir.mY, mAccDir.mX)));
+	mIsThrusting = accDir.Length() > 0;
+	if(mIsThrusting)
+		SetRotation(RoboMath::ToDegrees(std::atan2(accDir.mY, accDir.mX)) + 90);
 }
 
 void Tank::SimulateMovement(float inDeltaTime)

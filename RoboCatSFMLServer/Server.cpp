@@ -20,6 +20,7 @@ Server::Server()
 	GameObjectRegistry::sInstance->RegisterCreationFunction('MOUS', MouseServer::StaticCreate);
 	GameObjectRegistry::sInstance->RegisterCreationFunction('YARN', YarnServer::StaticCreate);
 	GameObjectRegistry::sInstance->RegisterCreationFunction('TANK', TankServer::StaticCreate);
+	GameObjectRegistry::sInstance->RegisterCreationFunction('PROJ', ProjectileServer::StaticCreate);
 
 	InitNetworkManager();
 
@@ -92,7 +93,6 @@ void Server::DoFrame()
 	Engine::DoFrame();
 
 	NetworkManagerServer::sInstance->SendOutgoingPackets();
-
 }
 
 void Server::HandleNewClient(ClientProxyPtr inClientProxy)

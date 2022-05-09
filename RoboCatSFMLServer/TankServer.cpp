@@ -53,7 +53,7 @@ void TankServer::Update()
 void TankServer::HandleShooting()
 {
 	float time = Timing::sInstance.GetFrameStartTime();
-	if (mIsShooting && Timing::sInstance.GetFrameStartTime() > mTimeOfNextShot)
+	if (mIsShooting && time > mTimeOfNextShot)
 	{
 		//not exact, but okay
 		mTimeOfNextShot = time + mTimeBetweenShots;

@@ -35,6 +35,7 @@
     <ClInclude Include="MultiplayerGameState.hpp" />
     <ClInclude Include="NetworkManagerClient.hpp" />
     <ClInclude Include="PlayerSpriteComponent.hpp" />
+    <ClInclude Include="ProjectileClient.hpp" />
     <ClInclude Include="RenderManager.hpp" />
     <ClInclude Include="ReplicationManagerClient.hpp" />
     <ClInclude Include="RoboCatClient.hpp" />
@@ -67,6 +68,7 @@
     <ClCompile Include="MultiplayerGameState.cpp" />
     <ClCompile Include="NetworkManagerClient.cpp" />
     <ClCompile Include="PlayerSpriteComponent.cpp" />
+    <ClCompile Include="ProjectileClient.cpp" />
     <ClCompile Include="RenderManager.cpp" />
     <ClCompile Include="ReplicationManagerClient.cpp" />
     <ClCompile Include="RoboCatClient.cpp" />

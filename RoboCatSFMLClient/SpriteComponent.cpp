@@ -29,6 +29,8 @@ sf::Sprite& SpriteComponent::GetSprite()
 	auto rot = mGameObject->GetRotation();
 	m_sprite.setPosition(pos.mX, pos.mY);
 	m_sprite.setRotation(rot);
+	Vector3 gObjColor = mGameObject->GetColor();
+	m_sprite.setColor(sf::Color(gObjColor.mX, gObjColor.mY, gObjColor.mZ, 255));
 
 	return m_sprite;
 }

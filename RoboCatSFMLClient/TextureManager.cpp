@@ -21,7 +21,7 @@ TextureManager::TextureManager()
 	//GAME
 	
 	//Tanks
-	CacheTexture(ETextures::kTank, "../Assets/Textures/Tanx2.png", sf::IntRect(1, 12, 10, 10));
+	CacheTexture(ETextures::kTank, "../Assets/Textures/Tanx2.png", sf::IntRect(34, 12, 10, 10));
 	//Background
 	CacheTexture(ETextures::kBackground, "../Assets/Textures/Tanx2.png", sf::IntRect(88, 44, 10, 10));
 	//Pickups

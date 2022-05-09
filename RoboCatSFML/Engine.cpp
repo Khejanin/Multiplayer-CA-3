@@ -65,6 +65,7 @@ int Engine::DoRunLoop()
 
 void Engine::DoFrame()
 {
+	World::sInstance->Update();
 }
 
 

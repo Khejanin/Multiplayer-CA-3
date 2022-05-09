@@ -10,6 +10,11 @@ void ScoreBoardManager::StaticInit()
 
 ScoreBoardManager::ScoreBoardManager()
 {
+	mDefaultColors.push_back(Colors::Green);
+	mDefaultColors.push_back(Colors::Red);
+	mDefaultColors.push_back(Colors::Blue);
+	mDefaultColors.push_back(Colors::Black);
+	mDefaultColors.push_back(Colors::White);
 	mDefaultColors.push_back(Colors::LightYellow);
 	mDefaultColors.push_back(Colors::LightBlue);
 	mDefaultColors.push_back(Colors::LightPink);

@@ -157,24 +157,28 @@ void NetworkManagerServer::UpdateAllClients()
 
 void NetworkManagerServer::SendStatePacketToClient(ClientProxyPtr inClientProxy)
 {
-	//build state packet
-	OutputMemoryBitStream	statePacket;
+	int bytesSent = 0;
+	int numPacket = 1;
+	bool done = false;
+	while (!done) {
+		//build state packet
+		OutputMemoryBitStream	statePacket;
 
-	//it's state!
-	statePacket.Write(kStateCC);
+		//it's state!
+		statePacket.Write(kStateCC);
 
-	InFlightPacket* ifp = inClientProxy->GetDeliveryNotificationManager().WriteState(statePacket);
+		InFlightPacket* ifp = inClientProxy->GetDeliveryNotificationManager().WriteState(statePacket);
 
-	WriteLastMoveTimestampIfDirty(statePacket, inClientProxy);
+		WriteLastMoveTimestampIfDirty(statePacket, inClientProxy);
 
-	AddScoreBoardStateToPacket(statePacket);
+		AddScoreBoardStateToPacket(statePacket);
 
-	ReplicationManagerTransmissionData* rmtd = new ReplicationManagerTransmissionData(&inClientProxy->GetReplicationManagerServer());
-	inClientProxy->GetReplicationManagerServer().Write(statePacket, rmtd);
-	ifp->SetTransmissionData('RPLM', TransmissionDataPtr(rmtd));
+		ReplicationManagerTransmissionData* rmtd = new ReplicationManagerTransmissionData(&inClientProxy->GetReplicationManagerServer());
+		inClientProxy->GetReplicationManagerServer().Write(statePacket, rmtd, done);
+		ifp->SetTransmissionData('RPLM', TransmissionDataPtr(rmtd));
 
-	SendPacket(statePacket, inClientProxy->GetSocketAddress());
-
+		SendPacket(statePacket, inClientProxy->GetSocketAddress());
+	}
 }
 
 void NetworkManagerServer::WriteLastMoveTimestampIfDirty(OutputMemoryBitStream& inOutputStream, ClientProxyPtr inClientProxy)

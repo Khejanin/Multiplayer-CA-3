@@ -26,11 +26,12 @@ void ReplicationManagerServer::HandleCreateAckd(int inNetworkId)
 	mNetworkIdToReplicationCommand[inNetworkId].HandleCreateAckd();
 }
 
-void ReplicationManagerServer::Write(OutputMemoryBitStream& inOutputStream, ReplicationManagerTransmissionData* ioTransmissionData)
+void ReplicationManagerServer::Write(OutputMemoryBitStream& inOutputStream, ReplicationManagerTransmissionData* ioTransmissionData, bool& done)
 {
 	//run through each replication command and do something...
 	for (auto& pair : mNetworkIdToReplicationCommand)
 	{
+		if (inOutputStream.GetByteLength() > 1450) return;
 		ReplicationCommand& replicationCommand = pair.second;
 		if (replicationCommand.HasDirtyState())
 		{
@@ -71,6 +72,8 @@ void ReplicationManagerServer::Write(OutputMemoryBitStream& inOutputStream, Repl
 
 		}
 	}
+
+	done = true;
 }
 
 

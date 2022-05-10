@@ -5,6 +5,7 @@ public:
 	void HandleDying() override;
 
 	void Hit();
+	bool HandleCollisionWithDynamicGameObject(DynamicGameObject* inDynGo) override;
 
 protected:
 	TileServer();

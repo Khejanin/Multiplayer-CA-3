@@ -17,3 +17,23 @@ void TileServer::Hit()
 		SetDoesWantToDie(true);
 	}
 }
+
+bool TileServer::HandleCollisionWithDynamicGameObject(DynamicGameObject* inDynGo)
+{
+	switch (inDynGo->GetClassId())
+	{
+	case 'PROJ':
+		{
+			Projectile* proj = dynamic_cast<Projectile*>(inDynGo);
+
+			//projectile dies!
+			proj->SetDoesWantToDie(true);
+
+			Hit();
+		}
+		break;
+		return false;
+	}
+
+	return true;
+}

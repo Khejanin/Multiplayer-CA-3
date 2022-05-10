@@ -23,28 +23,18 @@ void ProjectileServer::Update()
 
 bool ProjectileServer::HandleCollisionWithDynamicGameObject(DynamicGameObject* inDynGo)
 {
-	switch(inDynGo->GetClassId())
+	switch (inDynGo->GetClassId())
 	{
-	case 'TANK': 
-	{
-		Tank* tank = dynamic_cast<Tank*>(inDynGo);
-		if (tank->GetPlayerId() != GetPlayerId())
+	case 'TANK':
 		{
-			//kill yourself!
-			SetDoesWantToDie(true);
+			Tank* tank = dynamic_cast<Tank*>(inDynGo);
+			if (tank->GetPlayerId() != GetPlayerId())
+			{
+				//kill yourself!
+				SetDoesWantToDie(true);
 
-			dynamic_cast<TankServer*>(tank)->TakeDamage(GetPlayerId(), 10);
-		}
-	}
-		break;
-	case 'TILE':
-		{
-		Tile* tile = dynamic_cast<Tile*>(inDynGo);
-		
-			//kill yourself!
-			SetDoesWantToDie(true);
-
-			dynamic_cast<TileServer*>(tile)->Hit();
+				dynamic_cast<TankServer*>(tank)->TakeDamage(GetPlayerId(), 10);
+			}
 		}
 		break;
 	}

@@ -79,6 +79,7 @@ void Projectile::Update()
 
 	SetPosition(GetPosition() + mVelocity * deltaTime);
 
+	ProcessCollisions();
 	//we'll let the tanks handle the collisions
 }
 

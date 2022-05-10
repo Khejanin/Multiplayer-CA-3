@@ -19,8 +19,6 @@ uint32_t Tile::Write(OutputMemoryBitStream& inOutputStream, uint32_t inDirtyStat
 		inOutputStream.Write(location.mX);
 		inOutputStream.Write(location.mY);
 
-		inOutputStream.Write(GetRotation());
-
 		writtenState |= ETRS_Pose;
 	}
 	else
@@ -32,6 +30,8 @@ uint32_t Tile::Write(OutputMemoryBitStream& inOutputStream, uint32_t inDirtyStat
 	{
 		inOutputStream.Write((bool)true);
 		inOutputStream.Write(mTexId);
+
+		writtenState |= ETRS_Tex;
 	}
 	else
 	{
@@ -48,6 +48,18 @@ void Tile::Update()
 
 bool Tile::HandleCollisionWithDynamicGameObject(DynamicGameObject* inDynGo)
 {
+	switch (inDynGo->GetClassId())
+	{
+	case 'PROJ':
+	{
+		Projectile* proj = dynamic_cast<Projectile*>(inDynGo);
+
+		//projectile dies!
+		proj->SetDoesWantToDie(true);
+		return false;
+	}
+	break;
+	}
 	return true;
 }
 

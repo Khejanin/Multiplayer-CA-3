@@ -3,7 +3,7 @@
 TileClient::TileClient() : Tile()
 {
 	mSpriteComponent.reset(new SpriteComponent(this));
-	mSpriteComponent->SetTexture(TextureManager::sInstance->GetTexture(ETextures::kExplosion));
+	mSpriteComponent->SetTexture(TextureManager::sInstance->GetTexture(ETextures::kTileUpRight));
 }
 
 void TileClient::Read(InputMemoryBitStream& inInputStream)
@@ -17,10 +17,6 @@ void TileClient::Read(InputMemoryBitStream& inInputStream)
 		inInputStream.Read(location.mX);
 		inInputStream.Read(location.mY);
 		SetPosition(location);
-
-		float rotation;
-		inInputStream.Read(rotation);
-		SetRotation(rotation);
 	}
 
 	inInputStream.Read(stateBit);

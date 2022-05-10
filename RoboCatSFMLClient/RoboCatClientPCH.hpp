@@ -2,8 +2,6 @@
 
 #include "SFML\Graphics.hpp"
 
-#include "sstream"
-
 #include "Animation.hpp"
 //Utility depends on Animation
 #include "Utility.hpp"
@@ -29,6 +27,7 @@
 #include "YarnClient.hpp"
 #include "TankClient.hpp"
 #include "ProjectileClient.hpp"
+#include "TileClient.hpp"
 
 #include "HUD.hpp"
 

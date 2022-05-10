@@ -38,7 +38,14 @@ bool ProjectileServer::HandleCollisionWithDynamicGameObject(DynamicGameObject* i
 	}
 		break;
 	case 'TILE':
-		//TODO Case Tile
+		{
+		Tile* tile = dynamic_cast<Tile*>(inDynGo);
+		
+			//kill yourself!
+			SetDoesWantToDie(true);
+
+			dynamic_cast<TileServer*>(tile)->Hit();
+		}
 		break;
 	}
 

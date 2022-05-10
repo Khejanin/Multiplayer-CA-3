@@ -23,7 +23,7 @@ TextureManager::TextureManager()
 	//Tanks
 	CacheTexture(ETextures::kTank, "../Assets/Textures/Tanx2.png", sf::IntRect(34, 12, 10, 10));
 	//Background
-	CacheTexture(ETextures::kBackground, "../Assets/Textures/Tanx2.png", sf::IntRect(88, 44, 10, 10));
+	CacheTexture(ETextures::kBackground, "../Assets/Textures/Tanx2.png", sf::IntRect(89, 45, 10, 10));
 	//Pickups
 	CacheTexture(ETextures::kHealthRefill, "../Assets/Textures/HealthRefill.png");
 	CacheTexture(ETextures::kAmmoRefill, "../Assets/Textures/FireSpread.png");
@@ -34,6 +34,11 @@ TextureManager::TextureManager()
 	CacheTexture(ETextures::kMissile, "../Assets/Textures/Missile.png");
 	//FX
 	CacheTexture(ETextures::kExplosion, "../Assets/Textures/Explosion.png");
+	//Tiles
+	CacheTexture(ETextures::kTileUpLeft, "../Assets/Textures/Tanx2.png", sf::IntRect(1, 56, 10, 10));
+	CacheTexture(ETextures::kTileUpRight, "../Assets/Textures/Tanx2.png", sf::IntRect(12, 56, 10, 10));
+	CacheTexture(ETextures::kTileDownLeft, "../Assets/Textures/Tanx2.png", sf::IntRect(1, 67, 10, 10));
+	CacheTexture(ETextures::kTileDownRight, "../Assets/Textures/Tanx2.png", sf::IntRect(12, 67, 10, 10));
 }
 
 TexturePtr	TextureManager::GetTexture(const ETextures& inTextureName)

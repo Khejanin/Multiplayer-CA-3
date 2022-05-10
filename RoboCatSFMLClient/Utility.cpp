@@ -32,18 +32,6 @@ void Utility::CentreOrigin(Animation& animation)
 	animation.setOrigin(std::floor(bounds.left + bounds.width / 2.f), std::floor(bounds.top + bounds.height / 2.f));
 }
 
-//Taken from https://stackoverflow.com/questions/9435385/split-a-string-using-c11
-std::vector<std::string> Utility::Split(const std::string& s, char delim) {
-	std::stringstream ss(s);
-	std::string item;
-	std::vector<std::string> elems;
-	while (std::getline(ss, item, delim)) {
-		elems.push_back(item);
-		// elems.push_back(std::move(item)); // if C++11 (based on comment from @mchiasson)
-	}
-	return elems;
-}
-
 std::string Utility::toString(sf::Keyboard::Key key)
 {
 #define KEYTOSTRING_CASE(KEY) case sf::Keyboard::KEY: return #KEY;

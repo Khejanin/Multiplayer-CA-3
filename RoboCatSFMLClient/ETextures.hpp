@@ -18,5 +18,10 @@ enum class ETextures
 	kButtonSelected,
 	kButtonPressed,
 	kParticle,
-	kExplosion
+	kExplosion,
+
+	kTileUpLeft,
+	kTileUpRight,
+	kTileDownLeft,
+	kTileDownRight
 };

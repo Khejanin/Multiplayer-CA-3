@@ -114,6 +114,9 @@
     <ClInclude Include="ProjectileClient.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="TileClient.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Client.cpp">
@@ -201,6 +204,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ProjectileClient.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TileClient.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

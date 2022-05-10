@@ -4,7 +4,7 @@
 ProjectileClient::ProjectileClient()
 {
 	mSpriteComponent.reset(new SpriteComponent(this));
-	mSpriteComponent->SetTexture(TextureManager::sInstance->GetTexture(ETextures::kTank));
+	mSpriteComponent->SetTexture(TextureManager::sInstance->GetTexture(ETextures::kBullet));
 }
 
 void ProjectileClient::Read(InputMemoryBitStream& inInputStream)

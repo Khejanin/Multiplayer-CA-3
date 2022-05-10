@@ -11,5 +11,9 @@
 #include "TankServer.hpp"
 #include "MouseServer.hpp"
 #include "YarnServer.hpp"
+#include "TileServer.hpp"
 #include "ProjectileServer.hpp"
+
+
+#include "Map.hpp"
 

@@ -15,12 +15,9 @@ bool Server::StaticInit()
 
 Server::Server()
 {
-
-	GameObjectRegistry::sInstance->RegisterCreationFunction('RCAT', RoboCatServer::StaticCreate);
-	GameObjectRegistry::sInstance->RegisterCreationFunction('MOUS', MouseServer::StaticCreate);
-	GameObjectRegistry::sInstance->RegisterCreationFunction('YARN', YarnServer::StaticCreate);
 	GameObjectRegistry::sInstance->RegisterCreationFunction('TANK', TankServer::StaticCreate);
 	GameObjectRegistry::sInstance->RegisterCreationFunction('PROJ', ProjectileServer::StaticCreate);
+	GameObjectRegistry::sInstance->RegisterCreationFunction('TILE', TileServer::StaticCreate);
 
 	InitNetworkManager();
 
@@ -75,11 +72,10 @@ namespace
 
 void Server::SetupWorld()
 {
-	//spawn some random mice
-	//CreateRandomMice(10);
-
-	//spawn more random mice!
-	//CreateRandomMice(10);
+	//We need to load the map
+	std::vector<Vector3> spawner_positions;
+	Map::LoadMap("../Assets/Arena Data/map", 16, m_tank_spawns, spawner_positions, Vector3(WORLD_WIDTH / 2, WORLD_HEIGHT / 2, 0), 45.f);
+	//TODO: SPAWNERS NEXT
 }
 
 void Server::DoFrame()
@@ -110,7 +106,7 @@ void Server::SpawnTankForPlayer(int inPlayerId)
 	tank->SetColor(ScoreBoardManager::sInstance->GetEntry(inPlayerId)->GetColor());
 	tank->SetPlayerId(inPlayerId);
 	//gotta pick a better spawn location than this...
-	tank->SetPosition(Vector3(600.f - static_cast<float>(inPlayerId), 400.f, 0.f));
+	tank->SetPosition(m_tank_spawns[inPlayerId]);
 }
 
 void Server::HandleLostClient(ClientProxyPtr inClientProxy)

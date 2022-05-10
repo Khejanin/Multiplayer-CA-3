@@ -21,5 +21,7 @@ private:
 	bool	InitNetworkManager();
 	void	SetupWorld();
 
+private:
+	std::map<int, Vector3> m_tank_spawns;
 };
 

@@ -9,7 +9,6 @@ namespace sf
 class Utility
 {
 public:
-	static std::vector<std::string> Split(const std::string& s, char delim);
 	static void CentreOrigin(sf::Sprite& sprite);
 	static void CentreOrigin(sf::Text& text);
 	static void CentreOrigin(Animation& animation);

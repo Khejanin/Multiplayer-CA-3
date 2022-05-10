@@ -180,6 +180,7 @@
     <ClInclude Include="StringUtils.hpp" />
     <ClInclude Include="Tank.hpp" />
     <ClInclude Include="TCPSocket.hpp" />
+    <ClInclude Include="Tile.hpp" />
     <ClInclude Include="Timing.hpp" />
     <ClInclude Include="TransmissionData.hpp" />
     <ClInclude Include="UDPSocket.hpp" />
@@ -217,6 +218,7 @@
     <ClCompile Include="StringUtils.cpp" />
     <ClCompile Include="Tank.cpp" />
     <ClCompile Include="TCPSocket.cpp" />
+    <ClCompile Include="Tile.cpp" />
     <ClCompile Include="Timing.cpp" />
     <ClCompile Include="UDPSocket.cpp" />
     <ClCompile Include="World.cpp" />

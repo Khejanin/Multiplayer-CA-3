@@ -65,7 +65,7 @@ void RenderManager::Render()
 	// Clear the back buffer
 	//
 	WindowManager::sInstance->clear(sf::Color(100, 149, 237, 255));
-	WindowManager::SetDefaultView();
+	WindowManager::SetCameraView();
 
 	StateStack::sInstance->Draw();
 

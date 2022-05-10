@@ -37,6 +37,7 @@ const int SOCKET_ERROR = -1;
 #include "unordered_set"
 #include "functional"
 #include "cassert"
+#include "sstream"
 
 using std::shared_ptr;
 using std::unique_ptr;
@@ -53,8 +54,11 @@ class Tank;
 class GameObject;
 class DynamicGameObject;
 
-const float WORLD_WIDTH = 900;
-const float WORLD_HEIGHT = 800;
+const float WINDOW_WIDTH = 900;
+const float WINDOW_HEIGHT = 800;
+
+const float WORLD_WIDTH = 2700;
+const float WORLD_HEIGHT = 1800;
 
 #include "SFML\System.hpp"
 #include "SFML\Window.hpp"
@@ -79,6 +83,9 @@ const float WORLD_HEIGHT = 800;
 #include "AckRange.hpp"
 #include "DeliveryNotificationManager.hpp"
 
+//Enums
+
+
 #include "InputAction.hpp"
 #include "InputState.hpp"
 #include "Move.hpp"
@@ -93,6 +100,7 @@ const float WORLD_HEIGHT = 800;
 #include "Timing.hpp"
 #include "Mouse.hpp"
 #include "Yarn.hpp"
+#include "Tile.hpp"
 #include "Projectile.hpp"
 #include "StringUtils.hpp"
 #include "ScoreBoardManager.hpp"

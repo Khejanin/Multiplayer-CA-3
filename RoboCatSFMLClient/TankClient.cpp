@@ -11,6 +11,8 @@ TankClient::TankClient() :
 
 void TankClient::Update()
 {
+	HUD::sInstance->SetPlayerHealthOffset(Vector3(GetPosition().mX + 200, GetPosition().mY - 450, 10));
+
 	//is this the tank owned by us?
 	if (GetPlayerId() == NetworkManagerClient::sInstance->GetPlayerId())
 	{

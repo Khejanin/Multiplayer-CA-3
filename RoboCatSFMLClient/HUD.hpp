@@ -10,6 +10,7 @@ public:
 	void Render();
 
 	void SetPlayerHealth(int inHealth) { mHealth = inHealth; }
+	void SetPlayerHealthOffset(Vector3 offset) { mHealthOffset = offset; }
 
 private:
 

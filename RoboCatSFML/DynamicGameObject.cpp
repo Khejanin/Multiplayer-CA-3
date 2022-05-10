@@ -1,5 +1,12 @@
 #include "RoboCatPCH.hpp"
 
+DynamicGameObject::DynamicGameObject()
+	:mVelocity(Vector3::Zero),
+	mWallRestitution(0.1f),
+	mDynGoRestitution(0.1f)
+{
+}
+
 void DynamicGameObject::ProcessCollisions()
 {
 	//right now just bounce off the sides..
@@ -62,7 +69,7 @@ void DynamicGameObject::ProcessCollisions()
 						if (targetDynGo)
 						{
 							mVelocity -= impulse;
-							mVelocity *= mCatRestitution;
+							mVelocity *= mDynGoRestitution;
 						}
 						else
 						{
@@ -98,7 +105,7 @@ void DynamicGameObject::ProcessCollisionsWithScreenWalls()
 		location.mY = WORLD_HEIGHT - boundsYHalf;
 		SetPosition(location);
 	}
-	else if (y - boundsYHalf <= 0 && vy < 0)
+	else if ((y - boundsYHalf) <= 0 && vy < 0)
 	{
 		mVelocity.mY = -vy * mWallRestitution;
 		location.mY = boundsYHalf;
@@ -111,7 +118,7 @@ void DynamicGameObject::ProcessCollisionsWithScreenWalls()
 		location.mX = WORLD_WIDTH - boundsXHalf;
 		SetPosition(location);
 	}
-	else if (x - boundsXHalf <= 0 && vx < 0)
+	else if ((x - boundsXHalf) <= 0 && vx < 0)
 	{
 		mVelocity.mX = -vx * mWallRestitution;
 		location.mX = boundsXHalf;

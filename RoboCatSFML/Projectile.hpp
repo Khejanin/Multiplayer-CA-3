@@ -19,9 +19,6 @@ public:
 
 	virtual uint32_t	Write(OutputMemoryBitStream& inOutputStream, uint32_t inDirtyState) const override;
 
-	void			SetVelocity(const Vector3& inVelocity) { mVelocity = inVelocity; }
-	const Vector3& GetVelocity() const { return mVelocity; }
-
 	void		SetPlayerId(int inPlayerId) { mPlayerId = inPlayerId; }
 	int			GetPlayerId() const { return mPlayerId; }
 
@@ -33,7 +30,6 @@ public:
 
 protected:
 	Projectile();
-	Vector3		mVelocity;
 	float		mMuzzleSpeed;
 	int			mPlayerId;
 	//bool		mIsMissile;

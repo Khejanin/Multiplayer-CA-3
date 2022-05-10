@@ -1,8 +1,8 @@
 #include "RoboCatPCH.hpp"
 
 Projectile::Projectile() :
+	DynamicGameObject(),
 	mMuzzleSpeed(300.f),
-	mVelocity(Vector3::Zero),
 	mPlayerId(0)
 {
 	SetSize(Vector3(3, 14, 0));

@@ -26,9 +26,6 @@ public:
 	void		SetPlayerId(uint32_t inPlayerId) { mPlayerId = inPlayerId; }
 	uint32_t	GetPlayerId()						const { return mPlayerId; }
 
-	void			SetVelocity(const Vector3& inVelocity) { mVelocity = inVelocity; }
-	const Vector3& GetVelocity()						const { return mVelocity; }
-
 	virtual uint32_t	Write(OutputMemoryBitStream& inOutputStream, uint32_t inDirtyState) const override;
 
 protected:
@@ -39,15 +36,7 @@ private:
 
 	void	AdjustVelocityByThrust(float inDeltaTime);
 
-	Vector3				mVelocity;
-
-
 	float				mMaxLinearSpeed;
-
-	//bounce fraction when hitting various things
-	float				mWallRestitution;
-	float				mCatRestitution;
-
 
 	uint32_t			mPlayerId;
 

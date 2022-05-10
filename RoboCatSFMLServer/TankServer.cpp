@@ -31,10 +31,12 @@ void TankServer::Update()
 
 			float deltaTime = unprocessedMove.GetDeltaTime();
 
+			auto x = currentState.GetDesiredHorizontalDelta();
+
 			ProcessInput(deltaTime, currentState);
 			SimulateMovement(deltaTime);
-
-			LOG( "Server Move Time: %3.4f deltaTime: %3.4f left rot at %3.4f", unprocessedMove.GetTimestamp(), deltaTime, GetRotation() );
+			
+			//LOG( "Server Move Time: %3.4f deltaTime: %3.4f left rot at %3.4f", unprocessedMove.GetTimestamp(), deltaTime, GetRotation() );
 		}
 
 		moveList.Clear();

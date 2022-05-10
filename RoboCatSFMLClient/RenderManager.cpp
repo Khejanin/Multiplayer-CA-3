@@ -55,15 +55,6 @@ void RenderManager::RenderComponents()
 	//Get the logical viewport so we can pass this to the SpriteComponents when it's draw time
 	for (SpriteComponent* c : mComponents)
 	{
-		std::string str = "Drawing my boy with bounds ranging from : TOP :"
-			+ std::to_string(c->GetSprite().getGlobalBounds().top)
-			+ " LEFT : "
-			+ std::to_string(c->GetSprite().getGlobalBounds().left)
-			+ " WIDTH : "
-			+ std::to_string(c->GetSprite().getGlobalBounds().width)
-			+ " HEIGHT : "
-			+ std::to_string(c->GetSprite().getGlobalBounds().height);
-		LOG(str.c_str(), 0);
 		WindowManager::sInstance->draw(c->GetSprite());
 	}
 }

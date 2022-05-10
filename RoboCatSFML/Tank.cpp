@@ -3,9 +3,6 @@
 Tank::Tank() :
 	DynamicGameObject(),
 	mMaxLinearSpeed(5000.f),
-	mVelocity(Vector3::Zero),
-	mWallRestitution(0.1f),
-	mCatRestitution(0.1f),
 	mPlayerId(0),
 	mIsShooting(false),
 	mHealth(10)
@@ -42,7 +39,7 @@ void Tank::AdjustVelocityByThrust(float inDeltaTime)
 {
 	//just set the velocity based on the thrust direction -- no thrust will lead to 0 velocity
 	//simulating acceleration makes the client prediction a bit more complex
-	if (!mIsThrusting) 
+	if (!mIsThrusting)
 	{
 		mVelocity = Vector3::Zero;
 		return;

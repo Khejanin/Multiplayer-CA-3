@@ -6,17 +6,22 @@ public:
 	void ProcessCollisions();
 	DynamicGameObject* GetAsDynamicGameObject() override { return this; }
 
+	virtual void			SetVelocity(const Vector3& inVelocity) { mVelocity = inVelocity; }
+	virtual const Vector3&  GetVelocity()					 const { return mVelocity; }
+
 protected:
+	DynamicGameObject();
 	virtual void HitWall() { return; }
 
 private:
 	void ProcessCollisionsWithScreenWalls();
 
-private:
+protected:
 	Vector3				mVelocity;
 
+private:
 	//bounce fraction when hitting various things
 	float				mWallRestitution;
-	float				mCatRestitution;
+	float				mDynGoRestitution;
 };
 

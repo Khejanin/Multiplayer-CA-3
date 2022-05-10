@@ -75,6 +75,8 @@ void TankClient::Read(InputMemoryBitStream& inInputStream)
 	Vector3 oldLocation = GetPosition();
 	Vector3 oldVelocity = GetVelocity();
 
+	LOG("Tank position before Read: %f, %f", oldLocation.mX, oldLocation.mY)
+
 	float replicatedRotation;
 	Vector3 replicatedLocation;
 	Vector3 replicatedVelocity;
@@ -91,6 +93,8 @@ void TankClient::Read(InputMemoryBitStream& inInputStream)
 		inInputStream.Read(replicatedLocation.mY);
 
 		SetPosition(replicatedLocation);
+
+		LOG("Replicated Tank position: %f, %f", replicatedLocation.mX, replicatedLocation.mY)
 
 		inInputStream.Read(replicatedRotation);
 		SetRotation(replicatedRotation);
@@ -128,10 +132,13 @@ void TankClient::Read(InputMemoryBitStream& inInputStream)
 
 		DoClientSidePredictionAfterReplicationForLocalTank(readState);
 
+		LOG("Predicted Tank position : %f, %f", GetPosition().mX, GetPosition().mY)
+
 		//if this is a create packet, don't interpolate
 		if ((readState & ETRS_PlayerId) == 0)
 		{
 			InterpolateClientSidePrediction(oldRotation, oldLocation, oldVelocity, false);
+			LOG("Interpolated Tank position : %f, %f", GetPosition().mX, GetPosition().mY)
 		}
 	}
 	else
@@ -182,7 +189,7 @@ void TankClient::InterpolateClientSidePrediction(float inOldRotation, const Vect
 	if (!RoboMath::Is2DVectorEqual(inOldLocation, GetPosition()))
 	{
 		//LOG( "ERROR! Move replay ended with incorrect location!", 0 );
-
+		LOG("Position Out of sync", 0)
 		//have we been out of sync, or did we just become out of sync?
 		float time = Timing::sInstance.GetFrameStartTime();
 		if (mTimeLocationBecameOutOfSync == 0.f)
@@ -206,7 +213,7 @@ void TankClient::InterpolateClientSidePrediction(float inOldRotation, const Vect
 	if (!RoboMath::Is2DVectorEqual(inOldVelocity, GetVelocity()))
 	{
 		//LOG( "ERROR! Move replay ended with incorrect velocity!", 0 );
-
+		LOG("Velocity Out of sync", 0)
 		//have we been out of sync, or did we just become out of sync?
 		float time = Timing::sInstance.GetFrameStartTime();
 		if (mTimeVelocityBecameOutOfSync == 0.f)

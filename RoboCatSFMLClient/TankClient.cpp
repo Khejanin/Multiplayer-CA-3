@@ -11,7 +11,10 @@ TankClient::TankClient() :
 
 void TankClient::Update()
 {
-	HUD::sInstance->SetPlayerHealthOffset(Vector3(GetPosition().mX + 200, GetPosition().mY - 450, 10));
+	HUD::sInstance->SetPlayerHealthOffset(Vector3(GetPosition().mX - 400, GetPosition().mY - 450, 10));
+	HUD::sInstance->SetScoreBoardOffset(Vector3(GetPosition().mX - 200, GetPosition().mY - 450, 10));
+	HUD::sInstance->SetRTTOffset(Vector3(GetPosition().mX - 400, GetPosition().mY - 400, 10));
+	HUD::sInstance->SetBandwithOffset(Vector3(GetPosition().mX - 400, GetPosition().mY - 350, 10));
 
 	//is this the tank owned by us?
 	if (GetPlayerId() == NetworkManagerClient::sInstance->GetPlayerId())

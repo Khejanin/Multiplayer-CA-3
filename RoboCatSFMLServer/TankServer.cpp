@@ -32,26 +32,34 @@ void TankServer::Update()
 	Vector3 oldVelocity = GetVelocity();
 	float oldRotation = GetRotation();
 	
-	//is there a move we haven't processed yet?
-	ClientProxyPtr client = NetworkManagerServer::sInstance->GetClientProxy(GetPlayerId());
-	if (client)
+	if (mCatControlType == ESCT_Human)
 	{
-		MoveList& moveList = client->GetUnprocessedMoveList();
-		for (const Move& unprocessedMove : moveList)
+		//is there a move we haven't processed yet?
+		ClientProxyPtr client = NetworkManagerServer::sInstance->GetClientProxy(GetPlayerId());
+		if (client)
 		{
-			const InputState& currentState = unprocessedMove.GetInputState();
+			MoveList& moveList = client->GetUnprocessedMoveList();
+			for (const Move& unprocessedMove : moveList)
+			{
+				const InputState& currentState = unprocessedMove.GetInputState();
 
-			float deltaTime = unprocessedMove.GetDeltaTime();
+				float deltaTime = unprocessedMove.GetDeltaTime();
 
-			auto x = currentState.GetDesiredHorizontalDelta();
+				auto x = currentState.GetDesiredHorizontalDelta();
 
-			ProcessInput(deltaTime, currentState);
-			SimulateMovement(deltaTime);
-			
-			//LOG( "Server Move Time: %3.4f deltaTime: %3.4f left rot at %3.4f", unprocessedMove.GetTimestamp(), deltaTime, GetRotation() );
+				ProcessInput(deltaTime, currentState);
+				SimulateMovement(deltaTime);
+
+				//LOG( "Server Move Time: %3.4f deltaTime: %3.4f left rot at %3.4f", unprocessedMove.GetTimestamp(), deltaTime, GetRotation() );
+			}
+
+			moveList.Clear();
 		}
-
-		moveList.Clear();
+	}
+	else
+	{
+		//do some AI stuff
+		SimulateMovement(Timing::sInstance.GetDeltaTime());
 	}
 
 	HandleShooting();

@@ -11,6 +11,9 @@ public:
 
 	void SetPlayerHealth(int inHealth) { mHealth = inHealth; }
 	void SetPlayerHealthOffset(Vector3 offset) { mHealthOffset = offset; }
+	void SetScoreBoardOffset(Vector3 offset) { mScoreOffset = offset; }
+	void SetBandwithOffset(Vector3 offset) { mBandwidthOrigin = offset; }
+	void SetRTTOffset(Vector3 offset) { mRoundTripTimeOrigin = offset; }
 
 private:
 

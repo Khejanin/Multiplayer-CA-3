@@ -34,6 +34,8 @@ void Client::DoFrame()
 {
 	StateStack::sInstance->Update(Timing::sInstance.GetDeltaTime());
 
+	Engine::DoFrame();
+
 	InputManager::sInstance->Update();
 
 	if(is_connected)

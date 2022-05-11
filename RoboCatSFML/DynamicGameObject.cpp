@@ -2,8 +2,8 @@
 
 DynamicGameObject::DynamicGameObject()
 	:mVelocity(Vector3::Zero),
-	mWallRestitution(0.1f),
-	mDynGoRestitution(0.1f)
+	mWallRestitution(0.0f),
+	mDynGoRestitution(0.0f)
 {
 }
 

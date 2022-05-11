@@ -18,6 +18,7 @@ Server::Server()
 	GameObjectRegistry::sInstance->RegisterCreationFunction('TANK', TankServer::StaticCreate);
 	GameObjectRegistry::sInstance->RegisterCreationFunction('PROJ', ProjectileServer::StaticCreate);
 	GameObjectRegistry::sInstance->RegisterCreationFunction('TILE', TileServer::StaticCreate);
+	GameObjectRegistry::sInstance->RegisterCreationFunction('PICK', PickupServer::StaticCreate);
 
 	InitNetworkManager();
 
@@ -76,6 +77,7 @@ void Server::SetupWorld()
 	std::vector<Vector3> spawner_positions;
 	Map::LoadMap("../Assets/Arena Data/map", 16, m_tank_spawns, spawner_positions, Vector3(WORLD_WIDTH / 2, WORLD_HEIGHT / 2, 0), 45.f);
 	//TODO: SPAWNERS NEXT
+	PickupSpawnerManager::sInstance->StaticInit(1,spawner_positions, 0.5f);
 }
 
 void Server::DoFrame()
@@ -88,12 +90,13 @@ void Server::DoFrame()
 
 	Engine::DoFrame();
 
+	PickupSpawnerManager::sInstance->Update();
+
 	NetworkManagerServer::sInstance->SendOutgoingPackets();
 }
 
 void Server::HandleNewClient(ClientProxyPtr inClientProxy)
 {
-
 	int playerId = inClientProxy->GetPlayerId();
 
 	ScoreBoardManager::sInstance->AddEntry(playerId, inClientProxy->GetName());

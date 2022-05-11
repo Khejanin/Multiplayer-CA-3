@@ -34,6 +34,7 @@
     <ClInclude Include="MouseClient.hpp" />
     <ClInclude Include="MultiplayerGameState.hpp" />
     <ClInclude Include="NetworkManagerClient.hpp" />
+    <ClInclude Include="PickupClient.hpp" />
     <ClInclude Include="PlayerSpriteComponent.hpp" />
     <ClInclude Include="ProjectileClient.hpp" />
     <ClInclude Include="RenderManager.hpp" />
@@ -68,6 +69,7 @@
     <ClCompile Include="MouseClient.cpp" />
     <ClCompile Include="MultiplayerGameState.cpp" />
     <ClCompile Include="NetworkManagerClient.cpp" />
+    <ClCompile Include="PickupClient.cpp" />
     <ClCompile Include="PlayerSpriteComponent.cpp" />
     <ClCompile Include="ProjectileClient.cpp" />
     <ClCompile Include="RenderManager.cpp" />

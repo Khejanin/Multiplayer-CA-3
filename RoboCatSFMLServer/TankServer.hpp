@@ -9,13 +9,14 @@ public:
 
 	void SetCatControlType(ECatControlType inCatControlType) { mCatControlType = inCatControlType; }
 
+	void ApplyFireRateUpgrade();
 	void TakeDamage(int inDamagingPlayerId, int damageAmount);
+	void Heal(int healAmount);
 
 protected:
 	TankServer();
 
 private:
-
 	void HandleShooting();
 
 	ECatControlType	mCatControlType;
@@ -23,5 +24,5 @@ private:
 
 	float		mTimeOfNextShot;
 	float		mTimeBetweenShots;
-
+	float		mFireRateTimer;
 };

@@ -18,8 +18,6 @@ public:
 
 	virtual uint32_t	Write(OutputMemoryBitStream& inOutputStream, uint32_t inDirtyState) const override;
 
-	virtual void Update() override;
-
 	virtual bool HandleCollisionWithDynamicGameObject(DynamicGameObject* inDynGo) override;
 
 	virtual void SetTexId(int texId);

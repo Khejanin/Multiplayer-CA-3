@@ -5,7 +5,7 @@ Tank::Tank() :
 	mMaxLinearSpeed(5000.f),
 	mPlayerId(0),
 	mIsShooting(false),
-	mHealth(10)
+	mHealth(100)
 {
 	SetScale(5);
 	SetSize(Vector3(10, 10, 0));
@@ -104,7 +104,7 @@ uint32_t Tank::Write(OutputMemoryBitStream& inOutputStream, uint32_t inDirtyStat
 	if (inDirtyState & ETRS_Health)
 	{
 		inOutputStream.Write((bool)true);
-		inOutputStream.Write(mHealth, 4);
+		inOutputStream.Write(mHealth, 9);
 
 		writtenState |= ETRS_Health;
 	}

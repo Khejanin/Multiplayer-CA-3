@@ -120,7 +120,7 @@ void TankClient::Read(InputMemoryBitStream& inInputStream)
 	if (stateBit)
 	{
 		mHealth = 0;
-		inInputStream.Read(mHealth, 4);
+		inInputStream.Read(mHealth, 9);
 		readState |= ETRS_Health;
 	}
 

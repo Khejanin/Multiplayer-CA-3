@@ -41,11 +41,6 @@ uint32_t Tile::Write(OutputMemoryBitStream& inOutputStream, uint32_t inDirtyStat
 	return writtenState;
 }
 
-void Tile::Update()
-{
-	GameObject::Update();
-}
-
 bool Tile::HandleCollisionWithDynamicGameObject(DynamicGameObject* inDynGo)
 {
 	switch (inDynGo->GetClassId())

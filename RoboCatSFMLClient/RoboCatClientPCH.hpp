@@ -28,6 +28,7 @@
 #include "TankClient.hpp"
 #include "ProjectileClient.hpp"
 #include "TileClient.hpp"
+#include "PickupClient.hpp"
 
 #include "HUD.hpp"
 

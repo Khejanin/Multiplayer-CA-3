@@ -167,6 +167,7 @@
     <ClInclude Include="Move.hpp" />
     <ClInclude Include="MoveList.hpp" />
     <ClInclude Include="NetworkManager.hpp" />
+    <ClInclude Include="Pickup.hpp" />
     <ClInclude Include="Projectile.hpp" />
     <ClInclude Include="ReplicationCommand.hpp" />
     <ClInclude Include="RoboCat.hpp" />
@@ -202,6 +203,7 @@
     <ClCompile Include="Move.cpp" />
     <ClCompile Include="MoveList.cpp" />
     <ClCompile Include="NetworkManager.cpp" />
+    <ClCompile Include="Pickup.cpp" />
     <ClCompile Include="Projectile.cpp" />
     <ClCompile Include="RoboCat.cpp" />
     <ClCompile Include="RoboCatPCH.cpp">

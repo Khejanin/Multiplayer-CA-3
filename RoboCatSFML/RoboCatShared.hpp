@@ -102,6 +102,7 @@ const float WORLD_HEIGHT = 1800;
 #include "Yarn.hpp"
 #include "Tile.hpp"
 #include "Projectile.hpp"
+#include "Pickup.hpp"
 #include "StringUtils.hpp"
 #include "ScoreBoardManager.hpp"
 

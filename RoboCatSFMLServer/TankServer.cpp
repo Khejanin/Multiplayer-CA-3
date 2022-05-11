@@ -3,7 +3,8 @@
 TankServer::TankServer() :
 	mCatControlType(ESCT_Human),
 	mTimeOfNextShot(0.f),
-	mTimeBetweenShots(0.2f)
+	mTimeBetweenShots(0.5f),
+	mFireRateTimer(0.f)
 {}
 
 
@@ -15,6 +16,17 @@ void TankServer::HandleDying()
 void TankServer::Update()
 {
 	Tank::Update();
+
+	float dt = Timing::sInstance.GetDeltaTime();
+
+	//Tick down the upgrade timer
+	if (mFireRateTimer > 0) {
+		mFireRateTimer -= dt;
+		if(mFireRateTimer <= 0)
+		{
+			mTimeBetweenShots = 0.5f;
+		}
+	}
 
 	Vector3 oldLocation = GetPosition();
 	Vector3 oldVelocity = GetVelocity();
@@ -66,6 +78,12 @@ void TankServer::HandleShooting()
 	}
 }
 
+void TankServer::ApplyFireRateUpgrade()
+{
+	mFireRateTimer = 10.f;
+	mTimeBetweenShots = 0.25f;
+}
+
 void TankServer::TakeDamage(int inDamagingPlayerId, int damageAmount)
 {
 	mHealth -= damageAmount;
@@ -86,5 +104,12 @@ void TankServer::TakeDamage(int inDamagingPlayerId, int damageAmount)
 	}
 
 	//tell the world our health dropped
+	NetworkManagerServer::sInstance->SetStateDirty(GetNetworkId(), ETRS_Health);
+}
+
+void TankServer::Heal(int healAmount)
+{
+	mHealth += healAmount;
+	if (mHealth > 200) mHealth = 200;
 	NetworkManagerServer::sInstance->SetStateDirty(GetNetworkId(), ETRS_Health);
 }

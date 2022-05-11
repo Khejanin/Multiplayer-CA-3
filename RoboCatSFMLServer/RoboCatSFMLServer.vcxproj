@@ -156,6 +156,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Map.hpp" />
+    <ClInclude Include="PickupServer.hpp" />
+    <ClInclude Include="PickupSpawnerManager.hpp" />
     <ClInclude Include="ProjectileServer.hpp" />
     <ClInclude Include="ClientProxy.hpp" />
     <ClInclude Include="MouseServer.hpp" />
@@ -171,6 +173,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Map.cpp" />
+    <ClCompile Include="PickupServer.cpp" />
+    <ClCompile Include="PickupSpawnerManager.cpp" />
     <ClCompile Include="ProjectileServer.cpp" />
     <ClCompile Include="ClientProxy.cpp" />
     <ClCompile Include="MouseServer.cpp" />

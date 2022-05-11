@@ -10,7 +10,7 @@ void Map::LoadMap(std::string path, int tilesX, std::map<int, Vector3>& tank_spa
 		LoadLayer(path, "_Border.csv", textureAtlas, tilesX, Category::kWallTile);
 		return;
 	}*/
-	LoadLayer(path, "_Destroyable.csv", tilesX);
+	//LoadLayer(path, "_Destroyable.csv", tilesX);
 	LoadSpawns(path, "_Spawns.csv", tank_spawns, world_center, spawn_offset);
 
 	LoadFile(path, "_Pickups.csv", [&pickup_spawners](int xPos, int yPos, int elem)

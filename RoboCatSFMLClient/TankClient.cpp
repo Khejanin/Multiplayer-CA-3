@@ -11,16 +11,23 @@ TankClient::TankClient() :
 
 void TankClient::Update()
 {
-	HUD::sInstance->SetPlayerHealthOffset(Vector3(GetPosition().mX - 400, GetPosition().mY - 450, 10));
-	HUD::sInstance->SetScoreBoardOffset(Vector3(GetPosition().mX - 200, GetPosition().mY - 450, 10));
-	HUD::sInstance->SetRTTOffset(Vector3(GetPosition().mX - 400, GetPosition().mY - 400, 10));
-	HUD::sInstance->SetBandwithOffset(Vector3(GetPosition().mX - 400, GetPosition().mY - 350, 10));
-
+<<<<<<< Updated upstream
+	//is this the cat owned by us?
+	if (GetPlayerId() == NetworkManagerClient::sInstance->GetPlayerId())
+	{
+=======
+	
 	//is this the tank owned by us?
 	if (GetPlayerId() == NetworkManagerClient::sInstance->GetPlayerId())
 	{
 		WindowManager::SetViewCenter(GetPosition());
+		HUD::sInstance->SetPlayerHealthOffset(Vector3(GetPosition().mX - 400, GetPosition().mY - 450, 10));
+		HUD::sInstance->SetScoreBoardOffset(Vector3(GetPosition().mX - 200, GetPosition().mY - 450, 10));
+		HUD::sInstance->SetRTTOffset(Vector3(GetPosition().mX - 400, GetPosition().mY - 400, 10));
+		HUD::sInstance->SetBandwithOffset(Vector3(GetPosition().mX - 400, GetPosition().mY - 350, 10));
 
+
+>>>>>>> Stashed changes
 		const Move* pendingMove = InputManager::sInstance->GetAndClearPendingMove();
 		//in theory, only do this if we want to sample input this frame / if there's a new move ( since we have to keep in sync with server )
 		if (pendingMove) //is it time to sample a new move...
@@ -80,8 +87,11 @@ void TankClient::Read(InputMemoryBitStream& inInputStream)
 	Vector3 oldLocation = GetPosition();
 	Vector3 oldVelocity = GetVelocity();
 
-	LOG("Tank position before Read: %f, %f", oldLocation.mX, oldLocation.mY)
+<<<<<<< Updated upstream
+=======
+	LOG("Tank velocity before Read: %f, %f", oldVelocity.mX, oldVelocity.mY)
 
+>>>>>>> Stashed changes
 	float replicatedRotation;
 	Vector3 replicatedLocation;
 	Vector3 replicatedVelocity;
@@ -99,8 +109,11 @@ void TankClient::Read(InputMemoryBitStream& inInputStream)
 
 		SetPosition(replicatedLocation);
 
-		LOG("Replicated Tank position: %f, %f", replicatedLocation.mX, replicatedLocation.mY)
+<<<<<<< Updated upstream
+=======
+		LOG("Replicated Tank velocity: %f, %f", replicatedVelocity.mX, replicatedVelocity.mY)
 
+>>>>>>> Stashed changes
 		inInputStream.Read(replicatedRotation);
 		SetRotation(replicatedRotation);
 
@@ -123,10 +136,11 @@ void TankClient::Read(InputMemoryBitStream& inInputStream)
 	if (stateBit)
 	{
 		mHealth = 0;
-		inInputStream.Read(mHealth, 9);
+		inInputStream.Read(mHealth, 4);
 		readState |= ETRS_Health;
 	}
 
+<<<<<<< Updated upstream
 	if (GetPlayerId() == NetworkManagerClient::sInstance->GetPlayerId())
 	{
 		//did we get health? if so, tell the hud!
@@ -137,13 +151,10 @@ void TankClient::Read(InputMemoryBitStream& inInputStream)
 
 		DoClientSidePredictionAfterReplicationForLocalTank(readState);
 
-		LOG("Predicted Tank position : %f, %f", GetPosition().mX, GetPosition().mY)
-
 		//if this is a create packet, don't interpolate
 		if ((readState & ETRS_PlayerId) == 0)
 		{
 			InterpolateClientSidePrediction(oldRotation, oldLocation, oldVelocity, false);
-			LOG("Interpolated Tank position : %f, %f", GetPosition().mX, GetPosition().mY)
 		}
 	}
 	else
@@ -157,6 +168,38 @@ void TankClient::Read(InputMemoryBitStream& inInputStream)
 		}
 
 	}
+=======
+	//if (GetPlayerId() == NetworkManagerClient::sInstance->GetPlayerId())
+	//{
+	//	//did we get health? if so, tell the hud!
+	//	if ((readState & ETRS_Health) != 0)
+	//	{
+	//		HUD::sInstance->SetPlayerHealth(mHealth);
+	//	}
+
+	//	DoClientSidePredictionAfterReplicationForLocalTank(readState);
+
+	//	LOG("Predicted Tank Velocity : %f, %f", GetVelocity().mX, GetVelocity().mY)
+
+	//	//if this is a create packet, don't interpolate
+	//	if ((readState & ETRS_PlayerId) == 0)
+	//	{
+	//		InterpolateClientSidePrediction(oldRotation, oldLocation, oldVelocity, false);
+	//		LOG("Interpolated Tank Velocity : %f, %f", GetVelocity().mX, GetVelocity().mY)
+	//	}
+	//}
+	//else
+	//{
+	//	DoClientSidePredictionAfterReplicationForRemoteTank(readState);
+
+	//	//will this smooth us out too? it'll interpolate us just 10% of the way there...
+	//	if ((readState & ETRS_PlayerId) == 0)
+	//	{
+	//		InterpolateClientSidePrediction(oldRotation, oldLocation, oldVelocity, true);
+	//	}
+
+	//}
+>>>>>>> Stashed changes
 }
 
 
@@ -194,7 +237,7 @@ void TankClient::InterpolateClientSidePrediction(float inOldRotation, const Vect
 	if (!RoboMath::Is2DVectorEqual(inOldLocation, GetPosition()))
 	{
 		//LOG( "ERROR! Move replay ended with incorrect location!", 0 );
-		LOG("Position Out of sync", 0)
+
 		//have we been out of sync, or did we just become out of sync?
 		float time = Timing::sInstance.GetFrameStartTime();
 		if (mTimeLocationBecameOutOfSync == 0.f)
@@ -218,7 +261,7 @@ void TankClient::InterpolateClientSidePrediction(float inOldRotation, const Vect
 	if (!RoboMath::Is2DVectorEqual(inOldVelocity, GetVelocity()))
 	{
 		//LOG( "ERROR! Move replay ended with incorrect velocity!", 0 );
-		LOG("Velocity Out of sync", 0)
+
 		//have we been out of sync, or did we just become out of sync?
 		float time = Timing::sInstance.GetFrameStartTime();
 		if (mTimeVelocityBecameOutOfSync == 0.f)

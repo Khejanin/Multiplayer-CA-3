@@ -42,11 +42,10 @@ MenuState::MenuState()
 
 void MenuState::Draw()
 {
-	sf::RenderWindow& window = *WindowManager::sInstance;
+	sf::RenderTexture& window = *WindowManager::mRenderTexture;
 	WindowManager::SetDefaultView();
 	window.draw(m_background_sprite);
 	window.draw(m_gui_container);
-	
 }
 
 bool MenuState::Update(float dt)

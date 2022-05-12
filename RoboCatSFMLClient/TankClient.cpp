@@ -126,18 +126,27 @@ void TankClient::Read(InputMemoryBitStream& inInputStream)
 	}
 
 	inInputStream.Read(stateBit);
+	bool hasBeenHit = false;
 	if(stateBit)
 	{
 		ETankEventBitMask mask;
 		inInputStream.Read(mask, 4);
 		if ((mask & ETEB_Pickup) == ETEB_Pickup) SoundManager::sInstance->Play(ESounds::kCollectPickup);
 		if ((mask & ETEB_Shoot) == ETEB_Shoot) SoundManager::sInstance->Play(ESounds::kFire);
-		if ((mask & ETEB_Hurt) == ETEB_Hurt) SoundManager::sInstance->Play(ESounds::kHit);
+		if ((mask & ETEB_Hurt) == ETEB_Hurt)
+		{
+			SoundManager::sInstance->Play(ESounds::kHit);
+			hasBeenHit = true;
+		}
 		if ((mask & ETEB_Death) == ETEB_Death) SoundManager::sInstance->Play(ESounds::kTankDeath);
 	}
 
 	if (GetPlayerId() == NetworkManagerClient::sInstance->GetPlayerId())
 	{
+		if(hasBeenHit)
+		{
+			PostEffectsManager::ShakeItBaby();
+		}
 		//did we get health? if so, tell the hud!
 		if ((readState & ETRS_Health) != 0)
 		{

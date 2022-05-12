@@ -1,6 +1,7 @@
 typedef shared_ptr<sf::Texture> TexturePtr;
 typedef shared_ptr<sf::SoundBuffer> SoundPtr;
 typedef shared_ptr<sf::Font> FontPtr;
+typedef shared_ptr<sf::Shader> ShaderPtr;
 
 class SpriteComponent
 {

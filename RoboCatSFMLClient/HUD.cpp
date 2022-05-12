@@ -74,6 +74,6 @@ void HUD::RenderText(const string& inStr, const Vector3& origin, const Vector3& 
 	text.setCharacterSize(50);
 	text.setPosition(origin.mX, origin.mY);
 	text.setFont(*FontManager::sInstance->GetFont(EFonts::kMain));
-	WindowManager::sInstance->draw(text);
+	WindowManager::mRenderTexture->draw(text);
 }
 

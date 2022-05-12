@@ -14,10 +14,11 @@ protected:
 	virtual void HitWall() { return; }
 
 private:
-	void ProcessCollisionsWithScreenWalls();
+	void ProcessCollisionsWithWorldBounds();
 
 protected:
 	Vector3				mVelocity;
+	bool				mCollidesWithWorldBounds;
 
 private:
 	//bounce fraction when hitting various things

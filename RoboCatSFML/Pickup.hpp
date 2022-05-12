@@ -4,7 +4,9 @@ public:
 	enum Category
 	{
 		kHealthUp,
-		kFireRate
+		kFireRate,
+		kProjectileDamage,
+		kShotSpeed
 	};
 
 	CLASS_IDENTIFICATION('PICK', GameObject)

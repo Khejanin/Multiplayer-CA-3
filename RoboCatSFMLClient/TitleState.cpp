@@ -11,12 +11,12 @@ TitleState::TitleState()
 	m_text.setString("Press any key to continue");
 	Utility::CentreOrigin(m_text);
 	WindowManager::SetDefaultView();
-	m_text.setPosition(WindowManager::sInstance->getView().getSize() / 2.f);
+	m_text.setPosition(WindowManager::mRenderTexture->getView().getSize() / 2.f);
 }
 
 void TitleState::Draw()
 {
-	sf::RenderWindow& window = *WindowManager::sInstance;
+	sf::RenderTexture& window = *WindowManager::mRenderTexture;
 	WindowManager::SetDefaultView();
 	window.draw(m_background_sprite);
 

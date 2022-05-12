@@ -40,6 +40,9 @@ void PickupClient::SetCategory(Category category)
 	case kHealthUp:
 		mSpriteComponent->SetTexture(TextureManager::sInstance->GetTexture(ETextures::kHealthRefill));
 		break;
+	case kProjectileDamage:
+		mSpriteComponent->SetTexture(TextureManager::sInstance->GetTexture(ETextures::kAmmoRefill));
+		break;
 	}
 }
 

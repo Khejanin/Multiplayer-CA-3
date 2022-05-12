@@ -45,6 +45,9 @@ public:
 
 	void SetColor(const Vector3& inColor) { mColor = inColor; }
 	const Vector3& GetColor() const { return mColor; }
+	
+	void SetPriority(const int priority) { mPriority = priority; }
+	const int GetPriority() const { return mPriority; }
 
 	bool DoesWantToDie() const { return mDoesWantToDie; }
 	void SetDoesWantToDie(bool inWants) { mDoesWantToDie = inWants; }
@@ -59,6 +62,7 @@ private:
 	Vector3	mPosition;
 	Vector3 mSize;
 	Vector3	mColor;
+	int mPriority;
 	bool mCanCollide = false;
 
 	float mRotation;

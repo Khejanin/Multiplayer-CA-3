@@ -71,6 +71,7 @@ void Projectile::InitFromShooter(Tank* inShooter)
 	SetPosition(inShooter->GetPosition() /* + forward * 0.55f */);
 
 	SetRotation(inShooter->GetRotation());
+	SetPriority(1);
 }
 
 void Projectile::Update()

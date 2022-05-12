@@ -2,8 +2,8 @@
 
 DynamicGameObject::DynamicGameObject()
 	:mVelocity(Vector3::Zero),
-	mWallRestitution(0.0f),
-	mDynGoRestitution(0.0f)
+	mWallRestitution(0.1f),
+	mDynGoRestitution(0.1f)
 {
 }
 
@@ -46,7 +46,13 @@ void DynamicGameObject::ProcessCollisions()
 					dirToTarget.Normalize2D();
 					Vector3 acceptableDeltaFromSourceToTarget = dirToTarget * collisionDist;
 					//important note- we only move this cat. the other cat can take care of moving itself
-					SetPosition(targetPosition - acceptableDeltaFromSourceToTarget);
+					if (this->GetPriority() != 1)
+					{
+						SetPosition(targetPosition - acceptableDeltaFromSourceToTarget);
+					}
+					else {
+						LOG("HIT" , true);
+					}
 
 
 					Vector3 relVel = mVelocity;
@@ -78,6 +84,7 @@ void DynamicGameObject::ProcessCollisions()
 						}
 
 					}
+					
 				}
 			}
 		}

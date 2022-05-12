@@ -14,6 +14,7 @@ public:
 	void AddComponent(SpriteComponent* inComponent);
 	void RemoveComponent(SpriteComponent* inComponent);
 	int	 GetComponentIndex(SpriteComponent* inComponent) const;
+	void RenderBackground();
 
 private:
 
@@ -21,7 +22,7 @@ private:
 
 	//this can't be only place that holds on to component- it has to live inside a GameObject in the world
 	vector< SpriteComponent* >		mComponents;
-
+	std::unique_ptr<sf::Sprite> mBackground;
 	sf::View view;
 
 

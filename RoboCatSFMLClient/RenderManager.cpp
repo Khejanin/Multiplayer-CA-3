@@ -5,6 +5,13 @@ std::unique_ptr<RenderManager> RenderManager::sInstance;
 RenderManager::RenderManager()
 {
 	view.reset(sf::FloatRect(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT));
+	//Prepare the background
+	sf::Texture& texture = *TextureManager::sInstance->GetTexture(ETextures::kBackground);
+	sf::IntRect textureRect(0, 0, WORLD_WIDTH/5, WORLD_HEIGHT/5);
+	//Tile the texture to cover our world
+	texture.setRepeated(true);
+	mBackground = std::make_unique<sf::Sprite>(sf::Sprite(texture, textureRect));
+	(*mBackground).setScale(5,5);
 	WindowManager::sInstance->setView(view);
 }
 
@@ -44,6 +51,11 @@ int RenderManager::GetComponentIndex(SpriteComponent* inComponent) const
 	}
 
 	return -1;
+}
+
+void RenderManager::RenderBackground()
+{
+	WindowManager::sInstance->draw(*mBackground);
 }
 
 

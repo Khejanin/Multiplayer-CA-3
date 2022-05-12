@@ -7,6 +7,7 @@ MultiplayerGameState::MultiplayerGameState() : State()
 
 void MultiplayerGameState::Draw()
 {
+	RenderManager::sInstance->RenderBackground();
 	RenderManager::sInstance->RenderComponents();
 
 	HUD::sInstance->Render();

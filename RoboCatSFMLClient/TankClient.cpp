@@ -11,15 +11,16 @@ TankClient::TankClient() :
 
 void TankClient::Update()
 {
-	HUD::sInstance->SetPlayerHealthOffset(Vector3(GetPosition().mX - 400, GetPosition().mY - 450, 10));
-	HUD::sInstance->SetScoreBoardOffset(Vector3(GetPosition().mX - 200, GetPosition().mY - 450, 10));
-	HUD::sInstance->SetRTTOffset(Vector3(GetPosition().mX - 400, GetPosition().mY - 400, 10));
-	HUD::sInstance->SetBandwithOffset(Vector3(GetPosition().mX - 400, GetPosition().mY - 350, 10));
+	
 
 	//is this the tank owned by us?
 	if (GetPlayerId() == NetworkManagerClient::sInstance->GetPlayerId())
 	{
 		WindowManager::SetViewCenter(GetPosition());
+		HUD::sInstance->SetPlayerHealthOffset(Vector3(GetPosition().mX - 400, GetPosition().mY - 450, 10));
+		//HUD::sInstance->SetScoreBoardOffset(Vector3(GetPosition().mX - 200, GetPosition().mY - 450, 10));
+		HUD::sInstance->SetRTTOffset(Vector3(GetPosition().mX - 400, GetPosition().mY - 400, 10));
+		HUD::sInstance->SetBandwithOffset(Vector3(GetPosition().mX - 400, GetPosition().mY - 350, 10));
 
 		const Move* pendingMove = InputManager::sInstance->GetAndClearPendingMove();
 		//in theory, only do this if we want to sample input this frame / if there's a new move ( since we have to keep in sync with server )

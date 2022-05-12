@@ -57,8 +57,8 @@ class DynamicGameObject;
 const float WINDOW_WIDTH = 900;
 const float WINDOW_HEIGHT = 800;
 
-const float WORLD_WIDTH = 2700;
-const float WORLD_HEIGHT = 1800;
+const float WORLD_WIDTH = 900;
+const float WORLD_HEIGHT = 800;
 
 #include "SFML\System.hpp"
 #include "SFML\Window.hpp"

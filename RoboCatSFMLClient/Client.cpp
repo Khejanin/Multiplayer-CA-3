@@ -32,11 +32,11 @@ Client::Client()
 
 void Client::DoFrame()
 {
-	StateStack::sInstance->Update(Timing::sInstance.GetDeltaTime());
+	InputManager::sInstance->Update();
 
 	Engine::DoFrame();
 
-	InputManager::sInstance->Update();
+	StateStack::sInstance->Update(Timing::sInstance.GetDeltaTime());
 
 	if(is_connected)
 		NetworkManagerClient::sInstance->ProcessIncomingPackets();

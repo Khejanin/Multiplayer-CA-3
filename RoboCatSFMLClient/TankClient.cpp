@@ -127,36 +127,36 @@ void TankClient::Read(InputMemoryBitStream& inInputStream)
 		readState |= ETRS_Health;
 	}
 
-	//if (GetPlayerId() == NetworkManagerClient::sInstance->GetPlayerId())
-	//{
-	//	//did we get health? if so, tell the hud!
-	//	if ((readState & ETRS_Health) != 0)
-	//	{
-	//		HUD::sInstance->SetPlayerHealth(mHealth);
-	//	}
+	if (GetPlayerId() == NetworkManagerClient::sInstance->GetPlayerId())
+	{
+		//did we get health? if so, tell the hud!
+		if ((readState & ETRS_Health) != 0)
+		{
+			HUD::sInstance->SetPlayerHealth(mHealth);
+		}
 
-	//	DoClientSidePredictionAfterReplicationForLocalTank(readState);
+		DoClientSidePredictionAfterReplicationForLocalTank(readState);
 
-	//	LOG("Predicted Tank position : %f, %f", GetPosition().mX, GetPosition().mY)
+		LOG("Predicted Tank position : %f, %f", GetPosition().mX, GetPosition().mY)
 
-	//	//if this is a create packet, don't interpolate
-	//	if ((readState & ETRS_PlayerId) == 0)
-	//	{
-	//		InterpolateClientSidePrediction(oldRotation, oldLocation, oldVelocity, false);
-	//		LOG("Interpolated Tank position : %f, %f", GetPosition().mX, GetPosition().mY)
-	//	}
-	//}
-	//else
-	//{
-	//	DoClientSidePredictionAfterReplicationForRemoteTank(readState);
+		//if this is a create packet, don't interpolate
+		if ((readState & ETRS_PlayerId) == 0)
+		{
+			InterpolateClientSidePrediction(oldRotation, oldLocation, oldVelocity, false);
+			LOG("Interpolated Tank position : %f, %f", GetPosition().mX, GetPosition().mY)
+		}
+	}
+	else
+	{
+		DoClientSidePredictionAfterReplicationForRemoteTank(readState);
 
-	//	//will this smooth us out too? it'll interpolate us just 10% of the way there...
-	//	if ((readState & ETRS_PlayerId) == 0)
-	//	{
-	//		InterpolateClientSidePrediction(oldRotation, oldLocation, oldVelocity, true);
-	//	}
+		//will this smooth us out too? it'll interpolate us just 10% of the way there...
+		if ((readState & ETRS_PlayerId) == 0)
+		{
+			InterpolateClientSidePrediction(oldRotation, oldLocation, oldVelocity, true);
+		}
 
-	//}
+	}
 }
 
 
@@ -186,7 +186,7 @@ void TankClient::InterpolateClientSidePrediction(float inOldRotation, const Vect
 {
 	if (inOldRotation != GetRotation() && !inIsForRemoteCat)
 	{
-		LOG("ERROR! Move replay ended with incorrect rotation!", 0);
+		LOG("ERROR! Move replay ended with incorrect rotation!", 0)
 	}
 
 	float roundTripTime = NetworkManagerClient::sInstance->GetRoundTripTime();

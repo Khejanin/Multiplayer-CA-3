@@ -5,7 +5,7 @@ Projectile::Projectile() :
 	mMuzzleSpeed(300.f),
 	mPlayerId(0)
 {
-	SetSize(Vector3(3, 14, 0));
+	SetSize(Vector3(14, 14, 0));
 	SetPriority(1);
 }
 
@@ -68,19 +68,14 @@ void Projectile::InitFromShooter(Tank* inShooter)
 	SetPlayerId(inShooter->GetPlayerId());
 
 	Vector3 forward = inShooter->GetForwardVector();
-	SetVelocity(inShooter->GetVelocity() + forward * mMuzzleSpeed);
-	SetPosition(inShooter->GetPosition() /* + forward * 0.55f */);
+	SetVelocity(forward * mMuzzleSpeed);
+	SetPosition(inShooter->GetPosition() + forward * 0.55f);
 
 	SetRotation(inShooter->GetRotation());
 }
 
 void Projectile::Update()
 {
-	float deltaTime = Timing::sInstance.GetDeltaTime();
-
-	SetPosition(GetPosition() + mVelocity * deltaTime);
-
-	ProcessCollisions();
 }
 
 bool Projectile::HandleCollisionWithDynamicGameObject(DynamicGameObject* inDynGo)

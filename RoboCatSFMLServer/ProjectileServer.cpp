@@ -3,7 +3,7 @@
 ProjectileServer::ProjectileServer()
 {
 	//projectile lives five seconds...
-	mTimeToDie = Timing::sInstance.GetFrameStartTime() + 5.f;
+	mTimeToDie = Timing::sInstance.GetFrameStartTime() + 1.0f;
 }
 
 void ProjectileServer::HandleDying()
@@ -13,7 +13,19 @@ void ProjectileServer::HandleDying()
 
 void ProjectileServer::Update()
 {
-	Projectile::Update();
+	float deltaTime = Timing::sInstance.GetDeltaTime();
+
+	auto x = mVelocity.mX;
+	auto y = mVelocity.mY;
+	LOG("Projectile Velocity X: %f Y: %f", x, y)
+
+	SetPosition(GetPosition() + mVelocity * deltaTime);
+
+	NetworkManagerServer::sInstance->SetStateDirty(GetNetworkId(), EPRS_Pose);
+
+	LOG("Projectile Position X: %f Y: %f", GetPosition().mX, GetPosition().mY)
+
+	ProcessCollisions();
 
 	if (Timing::sInstance.GetFrameStartTime() > mTimeToDie)
 	{

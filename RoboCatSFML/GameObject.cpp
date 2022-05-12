@@ -7,7 +7,7 @@ GameObject::GameObject() :
 	mNetworkId(0),
 	mColor(Colors::White),
 	mScale(1.0f),
-	mPriority(0)
+	mPriority()
 {
 }
 

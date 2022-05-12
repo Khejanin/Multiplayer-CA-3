@@ -73,7 +73,7 @@ void RenderManager::RenderComponents()
 	{
 		auto bounds = (*goIt)->GetBounds();
 		sf::RectangleShape rect(sf::Vector2f(bounds.width, bounds.height));
-		rect.setPosition((*goIt)->GetPosition().mX, (*goIt)->GetPosition().mY);
+		rect.setPosition(bounds.left, bounds.top);
 		rect.setOutlineThickness(1.0f);
 		rect.setOutlineColor(sf::Color::Green);
 		rect.setFillColor(sf::Color::Transparent);

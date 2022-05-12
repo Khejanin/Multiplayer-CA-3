@@ -48,7 +48,7 @@ void DynamicGameObject::ProcessCollisions()
 				{
 					auto targetPosition = target->GetPosition();
 					auto delta = targetPosition - sourcePosition;
-					float targetRadius = std::sqrtf(std::powf(targetBounds.width, 2) + std::powf(targetBounds.height, 2));
+					float targetRadius = std::sqrtf(std::powf(targetBounds.width, 1) + std::powf(targetBounds.height, 1));
 					auto collisionDist = sourceRadius + targetRadius;
 
 					//okay, you hit something!

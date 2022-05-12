@@ -15,6 +15,7 @@ void MultiplayerGameState::Draw()
 
 bool MultiplayerGameState::Update(float dt)
 {
+	SoundManager::sInstance->RemoveStoppedSounds();
 	World::sInstance->Update();
 	return true;
 }

@@ -2,17 +2,17 @@
 #pragma once
 enum class ESounds
 {
-	kPlayer1Fire,
+	kFire,
 	kPlayer2Fire,
 	kPlayer1FireMissile,
 	kPlayer2FireMissile,
-	kTankExplosion1,
+	kTankDeath,
 	kTankExplosion2,
 	kMissileExplosion1,
 	kMissileExplosion2,
 	kCollectPickup,
 	kButton,
-	kPlayer1Hit,
+	kHit,
 	kPlayer2Hit,
 	kRepair,
 	kRestock,

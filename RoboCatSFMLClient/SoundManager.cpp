@@ -19,15 +19,14 @@ void SoundManager::StaticInit()
 
 SoundManager::SoundManager()
 {
-	CacheSound(ESounds::kPlayer1Fire, "../Assets/Sounds/Gunfire.wav");
-	CacheSound(ESounds::kPlayer2Fire, "../Assets/Sounds/Gunfire.wav");
+	CacheSound(ESounds::kFire, "../Assets/Sounds/Gunfire.wav");
 	CacheSound(ESounds::kPlayer1FireMissile, "../Assets/Sounds/Gunfire5.wav");
 	CacheSound(ESounds::kPlayer2FireMissile, "../Assets/Sounds/Gunfire5.wav");
-	CacheSound(ESounds::kTankExplosion1, "../Assets/Sounds/TankExplosion.wav");
+	CacheSound(ESounds::kTankDeath, "../Assets/Sounds/TankExplosion.wav");
 	CacheSound(ESounds::kTankExplosion2, "../Assets/Sounds/TankExplosion.wav");
 	CacheSound(ESounds::kMissileExplosion1, "../Assets/Sounds/MissileExplosion.wav");
 	CacheSound(ESounds::kMissileExplosion2, "../Assets/Sounds/MissileExplosion.wav");
-	CacheSound(ESounds::kPlayer1Hit, "../Assets/Sounds/Hit.wav");
+	CacheSound(ESounds::kHit, "../Assets/Sounds/Hit.wav");
 	CacheSound(ESounds::kPlayer2Hit, "../Assets/Sounds/Hit.wav");
 	CacheSound(ESounds::kCollectPickup, "../Assets/Sounds/CollectPickup.wav");
 	CacheSound(ESounds::kRepair, "../Assets/Sounds/Repair.wav");
@@ -58,13 +57,13 @@ void SoundManager::Play(ESounds effect)
 	Play(effect, GetListenerPosition());
 }
 
-void SoundManager::Play(ESounds effect, sf::Vector2f position)
+void SoundManager::Play(ESounds effect, Vector3 position)
 {
 	m_sounds.emplace_back(sf::Sound());
 	sf::Sound& sound = m_sounds.back();
 
 	sound.setBuffer(*(mNameToTextureMap[effect].get()));
-	sound.setPosition(position.x, -position.y, 0.f);
+	sound.setPosition(position.mX, -position.mY, 0.f);
 	sound.setAttenuation(Attenuation);
 	sound.setMinDistance(MinDistance3D);
 
@@ -79,14 +78,14 @@ void SoundManager::RemoveStoppedSounds()
 		});
 }
 
-void SoundManager::SetListenerPosition(sf::Vector2f position)
+void SoundManager::SetListenerPosition(Vector3 position)
 {
-	sf::Listener::setPosition(position.x, -position.y, ListenerZ);
+	sf::Listener::setPosition(position.mX, -position.mY, ListenerZ);
 }
 
-sf::Vector2f SoundManager::GetListenerPosition() const
+Vector3 SoundManager::GetListenerPosition() const
 {
 	sf::Vector3f position = sf::Listener::getPosition();
-	return sf::Vector2f(position.x, -position.y);
+	return Vector3(position.x, -position.y, 0);
 }
 

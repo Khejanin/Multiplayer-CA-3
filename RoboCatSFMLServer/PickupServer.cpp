@@ -26,6 +26,7 @@ bool PickupServer::HandleCollisionWithDynamicGameObject(DynamicGameObject* inDyn
 			tank->ApplyFireRateUpgrade();
 			break;
 		}
+		tank->UpgradeApplied();
 		SetDoesWantToDie(true);
 	}
 	return false;

@@ -16,6 +16,7 @@ void TankClient::Update()
 	//is this the tank owned by us?
 	if (GetPlayerId() == NetworkManagerClient::sInstance->GetPlayerId())
 	{
+		SoundManager::sInstance->SetListenerPosition(GetPosition());
 		WindowManager::SetViewCenter(GetPosition());
 		HUD::sInstance->SetPlayerHealthOffset(Vector3(GetPosition().mX - 400, GetPosition().mY - 450, 10));
 		//HUD::sInstance->SetScoreBoardOffset(Vector3(GetPosition().mX - 200, GetPosition().mY - 450, 10));
@@ -81,8 +82,6 @@ void TankClient::Read(InputMemoryBitStream& inInputStream)
 	Vector3 oldLocation = GetPosition();
 	Vector3 oldVelocity = GetVelocity();
 
-	//LOG("Tank position before Read: %f, %f", oldLocation.mX, oldLocation.mY)
-
 	float replicatedRotation;
 	Vector3 replicatedLocation;
 	Vector3 replicatedVelocity;
@@ -99,8 +98,6 @@ void TankClient::Read(InputMemoryBitStream& inInputStream)
 		inInputStream.Read(replicatedLocation.mY);
 
 		SetPosition(replicatedLocation);
-
-		//LOG("Replicated Tank position: %f, %f", replicatedLocation.mX, replicatedLocation.mY)
 
 		inInputStream.Read(replicatedRotation);
 		SetRotation(replicatedRotation);
@@ -128,6 +125,17 @@ void TankClient::Read(InputMemoryBitStream& inInputStream)
 		readState |= ETRS_Health;
 	}
 
+	inInputStream.Read(stateBit);
+	if(stateBit)
+	{
+		ETankEventBitMask mask;
+		inInputStream.Read(mask, 4);
+		if ((mask & ETEB_Pickup) == ETEB_Pickup) SoundManager::sInstance->Play(ESounds::kCollectPickup);
+		if ((mask & ETEB_Shoot) == ETEB_Shoot) SoundManager::sInstance->Play(ESounds::kFire);
+		if ((mask & ETEB_Hurt) == ETEB_Hurt) SoundManager::sInstance->Play(ESounds::kHit);
+		if ((mask & ETEB_Death) == ETEB_Death) SoundManager::sInstance->Play(ESounds::kTankDeath);
+	}
+
 	if (GetPlayerId() == NetworkManagerClient::sInstance->GetPlayerId())
 	{
 		//did we get health? if so, tell the hud!
@@ -138,13 +146,10 @@ void TankClient::Read(InputMemoryBitStream& inInputStream)
 
 		DoClientSidePredictionAfterReplicationForLocalTank(readState);
 
-		//LOG("Predicted Tank position : %f, %f", GetPosition().mX, GetPosition().mY)
-
 		//if this is a create packet, don't interpolate
 		if ((readState & ETRS_PlayerId) == 0)
 		{
 			InterpolateClientSidePrediction(oldRotation, oldLocation, oldVelocity, false);
-			//LOG("Interpolated Tank position : %f, %f", GetPosition().mX, GetPosition().mY)
 		}
 	}
 	else

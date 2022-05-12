@@ -9,8 +9,17 @@ public:
 		ETRS_Color = 1 << 1,
 		ETRS_PlayerId = 1 << 2,
 		ETRS_Health = 1 << 3,
+		ETRS_Event = 1 << 4,
 
-		ETRS_AllState = ETRS_Pose | ETRS_Color | ETRS_PlayerId | ETRS_Health
+		ETRS_AllState = ETRS_Pose | ETRS_Color | ETRS_PlayerId | ETRS_Health | ETRS_Event
+	};
+
+	enum ETankEventBitMask
+	{
+		ETEB_Hurt = 1 << 0,
+		ETEB_Pickup = 1 << 1,
+		ETEB_Shoot = 1 << 2,
+		ETEB_Death = 1 << 3,
 	};
 
 
@@ -27,6 +36,7 @@ public:
 	uint32_t	GetPlayerId()						const { return mPlayerId; }
 
 	virtual uint32_t	Write(OutputMemoryBitStream& inOutputStream, uint32_t inDirtyState) const override;
+	void PostWrite() override { mTankEvent = 0; }
 
 protected:
 	Tank();
@@ -50,6 +60,8 @@ protected:
 	int					mHealth;
 
 	bool				mIsShooting;
+
+	int					mTankEvent;
 };
 
 typedef shared_ptr< Tank >	TankPtr;

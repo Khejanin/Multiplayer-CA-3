@@ -6,10 +6,10 @@ public:
 	static std::unique_ptr<SoundManager>		sInstance;
 
 	void Play(ESounds effect);
-	void Play(ESounds effect, sf::Vector2f position);
+	void Play(ESounds effect, Vector3 position);
 
-	void SetListenerPosition(sf::Vector2f position);
-	sf::Vector2f GetListenerPosition() const;
+	void SetListenerPosition(Vector3 position);
+	Vector3 GetListenerPosition() const;
 
 	void RemoveStoppedSounds();
 

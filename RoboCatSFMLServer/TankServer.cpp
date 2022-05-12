@@ -10,6 +10,8 @@ TankServer::TankServer() :
 
 void TankServer::HandleDying()
 {
+	mTankEvent |= ETEB_Death;
+	NetworkManagerServer::sInstance->SetStateDirty(GetNetworkId(), ETRS_Event);
 	NetworkManagerServer::sInstance->UnregisterGameObject(this);
 }
 
@@ -77,6 +79,8 @@ void TankServer::HandleShooting()
 	float time = Timing::sInstance.GetFrameStartTime();
 	if (mIsShooting && time > mTimeOfNextShot)
 	{
+		mTankEvent |= ETEB_Shoot;
+		NetworkManagerServer::sInstance->SetStateDirty(GetNetworkId(), ETRS_Event);
 		//not exact, but okay
 		mTimeOfNextShot = time + mTimeBetweenShots;
 
@@ -84,6 +88,12 @@ void TankServer::HandleShooting()
 		ProjectilePtr projectile= std::static_pointer_cast<Projectile>(GameObjectRegistry::sInstance->CreateGameObject('PROJ'));
 		projectile->InitFromShooter(this);
 	}
+}
+
+void TankServer::UpgradeApplied()
+{
+	mTankEvent |= ETEB_Pickup;
+	NetworkManagerServer::sInstance->SetStateDirty(GetNetworkId(), ETRS_Event);
 }
 
 void TankServer::ApplyFireRateUpgrade()
@@ -94,6 +104,8 @@ void TankServer::ApplyFireRateUpgrade()
 
 void TankServer::TakeDamage(int inDamagingPlayerId, int damageAmount)
 {
+	mTankEvent |= ETEB_Hurt;
+	NetworkManagerServer::sInstance->SetStateDirty(GetNetworkId(), ETRS_Event);
 	mHealth -= damageAmount;
 	if (mHealth <= 0.f)
 	{

@@ -9,6 +9,7 @@ public:
 
 	void SetCatControlType(ECatControlType inCatControlType) { mCatControlType = inCatControlType; }
 
+	void UpgradeApplied();
 	void ApplyFireRateUpgrade();
 	void TakeDamage(int inDamagingPlayerId, int damageAmount);
 	void Heal(int healAmount);

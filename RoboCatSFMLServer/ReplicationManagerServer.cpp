@@ -83,7 +83,9 @@ uint32_t ReplicationManagerServer::WriteCreateAction(OutputMemoryBitStream& inOu
 	GameObjectPtr gameObject = NetworkManagerServer::sInstance->GetGameObject(inNetworkId);
 	//need 4 cc
 	inOutputStream.Write(gameObject->GetClassId());
-	return gameObject->Write(inOutputStream, inDirtyState);
+	uint32_t writtenState = gameObject->Write(inOutputStream, inDirtyState);
+	gameObject->PostWrite();
+	return writtenState;
 }
 
 uint32_t ReplicationManagerServer::WriteUpdateAction(OutputMemoryBitStream& inOutputStream, int inNetworkId, uint32_t inDirtyState)
@@ -98,6 +100,7 @@ uint32_t ReplicationManagerServer::WriteUpdateAction(OutputMemoryBitStream& inOu
 	//this means we need byte sand each new object needs to be byte aligned
 
 	uint32_t writtenState = gameObject->Write(inOutputStream, inDirtyState);
+	gameObject->PostWrite();
 
 	return writtenState;
 }

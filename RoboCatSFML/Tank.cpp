@@ -5,7 +5,8 @@ Tank::Tank() :
 	mMaxLinearSpeed(5000.f),
 	mPlayerId(0),
 	mIsShooting(false),
-	mHealth(100)
+	mHealth(100),
+	mTankEvent(0)
 {
 	SetScale(5);
 	SetSize(Vector3(10, 10, 0));
@@ -107,6 +108,18 @@ uint32_t Tank::Write(OutputMemoryBitStream& inOutputStream, uint32_t inDirtyStat
 		inOutputStream.Write(mHealth, 9);
 
 		writtenState |= ETRS_Health;
+	}
+	else
+	{
+		inOutputStream.Write((bool)false);
+	}
+
+	if(inDirtyState & ETRS_Event)
+	{
+		inOutputStream.Write((bool)true);
+		inOutputStream.Write(mTankEvent, 4);
+
+		writtenState |= ETRS_Event;
 	}
 	else
 	{

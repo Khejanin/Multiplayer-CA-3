@@ -22,7 +22,7 @@ public:
 	void		SetPlayerId(int inPlayerId) { mPlayerId = inPlayerId; }
 	int			GetPlayerId() const { return mPlayerId; }
 
-	void		InitFromShooter(Tank* inShooter);
+	void		InitFromShooter(Tank* inShooter, bool doubleDamage);
 
 	virtual void Update() override;
 
@@ -33,6 +33,7 @@ protected:
 	float		mMuzzleSpeed;
 	int			mPlayerId;
 	//bool		mIsMissile;
+	bool		mDoubleDamage;
 
 };
 

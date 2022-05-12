@@ -12,7 +12,7 @@ RenderManager::RenderManager()
 	texture.setRepeated(true);
 	mBackground = std::make_unique<sf::Sprite>(sf::Sprite(texture, textureRect));
 	(*mBackground).setScale(5,5);
-	WindowManager::sInstance->setView(view);
+	WindowManager::mRenderTexture->setView(view);
 }
 
 void RenderManager::StaticInit()
@@ -55,7 +55,7 @@ int RenderManager::GetComponentIndex(SpriteComponent* inComponent) const
 
 void RenderManager::RenderBackground()
 {
-	WindowManager::sInstance->draw(*mBackground);
+	WindowManager::mRenderTexture->draw(*mBackground);
 }
 
 
@@ -67,7 +67,7 @@ void RenderManager::RenderComponents()
 	//Get the logical viewport so we can pass this to the SpriteComponents when it's draw time
 	for (SpriteComponent* c : mComponents)
 	{
-		WindowManager::sInstance->draw(c->GetSprite());
+		WindowManager::mRenderTexture->draw(c->GetSprite());
 	}
 	for (auto goIt = World::sInstance->GetGameObjects().begin(), end = World::sInstance->GetGameObjects().end(); goIt != end; ++goIt)
 	{
@@ -77,7 +77,7 @@ void RenderManager::RenderComponents()
 		rect.setOutlineThickness(1.0f);
 		rect.setOutlineColor(sf::Color::Green);
 		rect.setFillColor(sf::Color::Transparent);
-		WindowManager::sInstance->draw(rect);
+		WindowManager::mRenderTexture->draw(rect);
 	}
 }
 
@@ -86,18 +86,11 @@ void RenderManager::Render()
 	//
 	// Clear the back buffer
 	//
-	WindowManager::sInstance->clear(sf::Color(100, 149, 237, 255));
+	WindowManager::mRenderTexture->clear(sf::Color(100, 149, 237, 255));
 	WindowManager::SetCameraView();
 
 	StateStack::sInstance->Draw();
 
-	/* Comment out
-	RenderManager::sInstance->RenderComponents();
-
-	HUD::sInstance->Render();
-	*/
-	//
-	// Present our back buffer to our front buffer
-	//
-	WindowManager::sInstance->display();
+	WindowManager::ApplyRenderTextureToWindow();
+	WindowManager::mRenderWindow->display();
 }

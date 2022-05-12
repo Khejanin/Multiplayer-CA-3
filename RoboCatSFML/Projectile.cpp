@@ -2,9 +2,11 @@
 
 Projectile::Projectile() :
 	DynamicGameObject(),
-	mMuzzleSpeed(300.f),
-	mPlayerId(0)
+	mMuzzleSpeed(500.f),
+	mPlayerId(0),
+	mDoubleDamage(false)
 {
+	mCollidesWithWorldBounds = false;
 	SetSize(Vector3(14, 14, 0));
 	SetPriority(1);
 }
@@ -62,14 +64,15 @@ uint32_t Projectile::Write(OutputMemoryBitStream& inOutputStream, uint32_t inDir
 	return writtenState;
 }
 
-void Projectile::InitFromShooter(Tank* inShooter)
+void Projectile::InitFromShooter(Tank* inShooter, bool doubleDamage)
 {
+	mDoubleDamage = doubleDamage;
 	SetColor(inShooter->GetColor());
 	SetPlayerId(inShooter->GetPlayerId());
 
 	Vector3 forward = inShooter->GetForwardVector();
 	SetVelocity(forward * mMuzzleSpeed);
-	SetPosition(inShooter->GetPosition() + forward * 0.55f);
+	SetPosition(inShooter->GetPosition() + forward * 20.0f);
 
 	SetRotation(inShooter->GetRotation());
 }

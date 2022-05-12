@@ -11,6 +11,7 @@ public:
 
 	void UpgradeApplied();
 	void ApplyFireRateUpgrade();
+	void ApplyDamageUpgrade();
 	void TakeDamage(int inDamagingPlayerId, int damageAmount);
 	void Heal(int healAmount);
 
@@ -26,4 +27,5 @@ private:
 	float		mTimeOfNextShot;
 	float		mTimeBetweenShots;
 	float		mFireRateTimer;
+	float		mDamageTimer;
 };

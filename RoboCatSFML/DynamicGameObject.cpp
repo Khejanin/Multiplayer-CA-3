@@ -3,14 +3,15 @@
 DynamicGameObject::DynamicGameObject()
 	:mVelocity(Vector3::Zero),
 	mWallRestitution(0.1f),
-	mDynGoRestitution(0.1f)
+	mDynGoRestitution(0.1f),
+	mCollidesWithWorldBounds(true)
 {
 }
 
 void DynamicGameObject::ProcessCollisions()
 {
 	//right now just bounce off the sides..
-	ProcessCollisionsWithScreenWalls();
+	if(mCollidesWithWorldBounds) ProcessCollisionsWithWorldBounds();
 
 	auto sourceBounds = GetBounds();
 	auto sourcePosition = GetPosition();
@@ -97,7 +98,7 @@ void DynamicGameObject::ProcessCollisions()
 
 }
 
-void DynamicGameObject::ProcessCollisionsWithScreenWalls()
+void DynamicGameObject::ProcessCollisionsWithWorldBounds()
 {
 	Vector3 location = GetPosition();
 	float x = location.mX;

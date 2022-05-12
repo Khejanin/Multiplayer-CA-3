@@ -9,7 +9,7 @@ void MultiplayerGameState::Draw()
 {
 	RenderManager::sInstance->RenderBackground();
 	RenderManager::sInstance->RenderComponents();
-
+	PostEffectsManager::ApplyPostEffects();
 	HUD::sInstance->Render();
 }
 
@@ -17,6 +17,7 @@ bool MultiplayerGameState::Update(float dt)
 {
 	SoundManager::sInstance->RemoveStoppedSounds();
 	World::sInstance->Update();
+	PostEffectsManager::Update();
 	return true;
 }
 

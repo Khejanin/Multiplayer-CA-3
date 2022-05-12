@@ -24,8 +24,6 @@ private:
 	vector< SpriteComponent* >		mComponents;
 	std::unique_ptr<sf::Sprite> mBackground;
 	sf::View view;
-
-
 };
 
 

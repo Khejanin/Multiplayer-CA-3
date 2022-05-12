@@ -12,15 +12,25 @@
 #include "EFonts.hpp"
 #include "EState.hpp"
 #include "EButton.hpp"
+#include "EShaders.hpp"
 
+//Post Effects
+#include "PostEffect.hpp"
+#include "ShakeEffect.hpp"
+#include "BloomEffect.hpp"
+#include "BlitPass.hpp"
+
+//Managers
 #include "InputManager.hpp"
 #include "SpriteComponent.hpp"
 #include "PlayerSpriteComponent.hpp"
 #include "TextureManager.hpp"
 #include "SoundManager.hpp"
 #include "FontManager.hpp"
+#include "ShaderManager.hpp"
 #include "RenderManager.hpp"
 #include "WindowManager.hpp"
+#include "PostEffectsManager.hpp"
 
 #include "RoboCatClient.hpp"
 #include "MouseClient.hpp"

@@ -21,8 +21,14 @@ PickupSpawnerManager::PickupSpawnerManager(float interval, std::vector<Vector3> 
 		SpawnPickup(spawnerId, Pickup::Category::kFireRate, pos);
 	};
 
+	auto m_spawn_damage_up = [this](int spawnerId, Vector3& pos)
+	{
+		SpawnPickup(spawnerId, Pickup::Category::kProjectileDamage, pos);
+	};
+
 	m_spawn_actions.emplace_back(m_spawn_health);
 	m_spawn_actions.emplace_back(m_spawn_fire_rate);
+	m_spawn_actions.emplace_back(m_spawn_damage_up);
 
 	SetupSpawners(spawn_positions);
 }

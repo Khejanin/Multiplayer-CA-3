@@ -11,6 +11,8 @@ bool Client::StaticInit()
 	WindowManager::StaticInit();
 	FontManager::StaticInit();
 	TextureManager::StaticInit();
+	ShaderManager::StaticInit();
+	PostEffectsManager::StaticInit();
 	RenderManager::StaticInit();
 	SoundManager::StaticInit();
 
@@ -66,7 +68,7 @@ void Client::HandleEvent(sf::Event& p_event)
 
 bool Client::PollEvent(sf::Event& p_event)
 {
-	return WindowManager::sInstance->pollEvent(p_event);
+	return WindowManager::mRenderWindow->pollEvent(p_event);
 }
 
 void Client::EstablishConnection()

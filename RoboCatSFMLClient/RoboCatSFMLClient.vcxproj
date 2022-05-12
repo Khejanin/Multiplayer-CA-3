@@ -20,11 +20,14 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Animation.hpp" />
+    <ClInclude Include="BlitPass.hpp" />
+    <ClInclude Include="BloomEffect.hpp" />
     <ClInclude Include="Button.hpp" />
     <ClInclude Include="EButton.hpp" />
     <ClInclude Include="Client.hpp" />
     <ClInclude Include="Component.hpp" />
     <ClInclude Include="Container.hpp" />
+    <ClInclude Include="EShaders.hpp" />
     <ClInclude Include="EState.hpp" />
     <ClInclude Include="FontManager.hpp" />
     <ClInclude Include="EFonts.hpp" />
@@ -36,11 +39,15 @@
     <ClInclude Include="NetworkManagerClient.hpp" />
     <ClInclude Include="PickupClient.hpp" />
     <ClInclude Include="PlayerSpriteComponent.hpp" />
+    <ClInclude Include="PostEffect.hpp" />
+    <ClInclude Include="PostEffectsManager.hpp" />
     <ClInclude Include="ProjectileClient.hpp" />
     <ClInclude Include="RenderManager.hpp" />
     <ClInclude Include="ReplicationManagerClient.hpp" />
     <ClInclude Include="RoboCatClient.hpp" />
     <ClInclude Include="RoboCatClientPCH.hpp" />
+    <ClInclude Include="ShaderManager.hpp" />
+    <ClInclude Include="ShakeEffect.hpp" />
     <ClInclude Include="SoundManager.hpp" />
     <ClInclude Include="ESounds.hpp" />
     <ClInclude Include="SpriteComponent.hpp" />
@@ -57,6 +64,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Animation.cpp" />
+    <ClCompile Include="BlitPass.cpp" />
+    <ClCompile Include="BloomEffect.cpp" />
     <ClCompile Include="Button.cpp" />
     <ClCompile Include="Client.cpp" />
     <ClCompile Include="ClientMain.cpp" />
@@ -71,6 +80,8 @@
     <ClCompile Include="NetworkManagerClient.cpp" />
     <ClCompile Include="PickupClient.cpp" />
     <ClCompile Include="PlayerSpriteComponent.cpp" />
+    <ClCompile Include="PostEffect.cpp" />
+    <ClCompile Include="PostEffectsManager.cpp" />
     <ClCompile Include="ProjectileClient.cpp" />
     <ClCompile Include="RenderManager.cpp" />
     <ClCompile Include="ReplicationManagerClient.cpp" />
@@ -81,6 +92,8 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="ShaderManager.cpp" />
+    <ClCompile Include="ShakeEffect.cpp" />
     <ClCompile Include="SoundManager.cpp" />
     <ClCompile Include="SpriteComponent.cpp" />
     <ClCompile Include="State.cpp" />

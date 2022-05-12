@@ -22,12 +22,18 @@ void TankServer::Update()
 	float dt = Timing::sInstance.GetDeltaTime();
 
 	//Tick down the upgrade timer
-	if (mFireRateTimer > 0) {
+	if (mFireRateTimer > 0) 
+	{
 		mFireRateTimer -= dt;
-		if(mFireRateTimer <= 0)
+		if (mFireRateTimer <= 0)
 		{
 			mTimeBetweenShots = 0.5f;
 		}
+	}
+
+	if (mDamageTimer > 0)
+	{
+		mDamageTimer-= dt;
 	}
 
 	Vector3 oldLocation = GetPosition();
@@ -86,7 +92,7 @@ void TankServer::HandleShooting()
 
 		//fire!
 		ProjectilePtr projectile= std::static_pointer_cast<Projectile>(GameObjectRegistry::sInstance->CreateGameObject('PROJ'));
-		projectile->InitFromShooter(this);
+		projectile->InitFromShooter(this, mDamageTimer > 0);
 	}
 }
 
@@ -100,6 +106,11 @@ void TankServer::ApplyFireRateUpgrade()
 {
 	mFireRateTimer = 10.f;
 	mTimeBetweenShots = 0.25f;
+}
+
+void TankServer::ApplyDamageUpgrade()
+{
+	mDamageTimer = 10.f;
 }
 
 void TankServer::TakeDamage(int inDamagingPlayerId, int damageAmount)

@@ -6,6 +6,7 @@ Projectile::Projectile() :
 	mPlayerId(0)
 {
 	SetSize(Vector3(3, 14, 0));
+	SetPriority(1);
 }
 
 uint32_t Projectile::Write(OutputMemoryBitStream& inOutputStream, uint32_t inDirtyState) const
@@ -71,7 +72,6 @@ void Projectile::InitFromShooter(Tank* inShooter)
 	SetPosition(inShooter->GetPosition() /* + forward * 0.55f */);
 
 	SetRotation(inShooter->GetRotation());
-	SetPriority(1);
 }
 
 void Projectile::Update()
@@ -81,7 +81,6 @@ void Projectile::Update()
 	SetPosition(GetPosition() + mVelocity * deltaTime);
 
 	ProcessCollisions();
-	//we'll let the tanks handle the collisions
 }
 
 bool Projectile::HandleCollisionWithDynamicGameObject(DynamicGameObject* inDynGo)

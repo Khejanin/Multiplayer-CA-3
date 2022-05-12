@@ -23,9 +23,7 @@ void ReplicationManagerClient::Read(InputMemoryBitStream& inInputStream)
 			ReadAndDoDestroyAction(inInputStream, networkId);
 			break;
 		}
-
 	}
-
 }
 
 void ReplicationManagerClient::ReadAndDoCreateAction(InputMemoryBitStream& inInputStream, int inNetworkId)

@@ -44,7 +44,5 @@ void ProjectileClient::Read(InputMemoryBitStream& inInputStream)
 		inInputStream.Read(mPlayerId, 8);
 	}
 
-	SetPriority(1);
-	
 }
 

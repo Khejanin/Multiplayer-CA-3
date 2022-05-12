@@ -69,6 +69,16 @@ void RenderManager::RenderComponents()
 	{
 		WindowManager::sInstance->draw(c->GetSprite());
 	}
+	for (auto goIt = World::sInstance->GetGameObjects().begin(), end = World::sInstance->GetGameObjects().end(); goIt != end; ++goIt)
+	{
+		auto bounds = (*goIt)->GetBounds();
+		sf::RectangleShape rect(sf::Vector2f(bounds.width, bounds.height));
+		rect.setPosition((*goIt)->GetPosition().mX, (*goIt)->GetPosition().mY);
+		rect.setOutlineThickness(1.0f);
+		rect.setOutlineColor(sf::Color::Green);
+		rect.setFillColor(sf::Color::Transparent);
+		WindowManager::sInstance->draw(rect);
+	}
 }
 
 void RenderManager::Render()

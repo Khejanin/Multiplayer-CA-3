@@ -33,7 +33,18 @@ void DynamicGameObject::ProcessCollisions()
 			{
 				//first, tell the other guy there was a collision with a cat, so it can do something...
 
-				if (target->HandleCollisionWithDynamicGameObject(this))
+				bool blocking = false;
+
+				if (this->GetPriority() > target->GetPriority())
+				{
+					blocking = HandleCollisionWithDynamicGameObject(this);
+				}
+				else
+				{
+					blocking = target->HandleCollisionWithDynamicGameObject(this);
+				}
+
+				if (blocking)
 				{
 					auto targetPosition = target->GetPosition();
 					auto delta = targetPosition - sourcePosition;
@@ -46,14 +57,8 @@ void DynamicGameObject::ProcessCollisions()
 					dirToTarget.Normalize2D();
 					Vector3 acceptableDeltaFromSourceToTarget = dirToTarget * collisionDist;
 					//important note- we only move this cat. the other cat can take care of moving itself
-					if (this->GetPriority() != 1)
-					{
-						SetPosition(targetPosition - acceptableDeltaFromSourceToTarget);
-					}
-					else {
-						LOG("HIT" , true);
-					}
 
+					SetPosition(targetPosition - acceptableDeltaFromSourceToTarget);
 
 					Vector3 relVel = mVelocity;
 

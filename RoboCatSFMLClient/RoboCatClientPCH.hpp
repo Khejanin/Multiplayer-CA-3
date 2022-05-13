@@ -35,6 +35,7 @@
 #include "RoboCatClient.hpp"
 #include "MouseClient.hpp"
 #include "YarnClient.hpp"
+#include "Explosion.hpp"
 #include "TankClient.hpp"
 #include "ProjectileClient.hpp"
 #include "TileClient.hpp"

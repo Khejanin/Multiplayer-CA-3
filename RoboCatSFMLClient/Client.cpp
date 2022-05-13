@@ -77,6 +77,7 @@ void Client::EstablishConnection()
 	GameObjectRegistry::sInstance->RegisterCreationFunction('PROJ', ProjectileClient::StaticCreate);
 	GameObjectRegistry::sInstance->RegisterCreationFunction('TILE', TileClient::StaticCreate);
 	GameObjectRegistry::sInstance->RegisterCreationFunction('PICK', PickupClient::StaticCreate);
+	GameObjectRegistry::sInstance->RegisterCreationFunction('EXPL', Explosion::StaticCreate);
 
 	string destination = StringUtils::GetCommandLineArg(1);
 	string name = StringUtils::GetCommandLineArg(2);

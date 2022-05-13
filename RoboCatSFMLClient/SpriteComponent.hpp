@@ -10,11 +10,9 @@ public:
 	SpriteComponent(GameObject* inGameObject);
 	~SpriteComponent();
 
-
 	void SetTexture(TexturePtr inTexture);
+	void SetTextureRect(sf::IntRect rect);
 	virtual sf::Sprite& GetSprite();
-	
-
 
 protected:
 

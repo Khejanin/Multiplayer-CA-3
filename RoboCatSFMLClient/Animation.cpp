@@ -5,8 +5,8 @@
 Animation::Animation()
 	: m_num_frames(0)
 	, m_current_frame(0)
-	, m_duration(sf::Time::Zero)
-	, m_elapsed_time(sf::Time::Zero)
+	, m_duration(0)
+	, m_elapsed_time(0)
 	, m_repeat(false)
 {
 }
@@ -16,8 +16,8 @@ Animation::Animation(const sf::Texture& texture)
 	, m_frame_size()
 	, m_num_frames(0)
 	, m_current_frame(0)
-	, m_duration(sf::Time::Zero)
-	, m_elapsed_time(sf::Time::Zero)
+	, m_duration(0)
+	, m_elapsed_time(0)
 	, m_repeat(false)
 {
 }
@@ -52,12 +52,12 @@ std::size_t Animation::GetNumFrames() const
 	return m_num_frames;
 }
 
-void Animation::SetDuration(sf::Time duration)
+void Animation::SetDuration(float duration)
 {
 	m_duration = duration;
 }
 
-sf::Time Animation::GetDuration() const
+float Animation::GetDuration() const
 {
 	return m_duration;
 }
@@ -92,9 +92,9 @@ sf::FloatRect Animation::GetGlobalBounds() const
 	return getTransform().transformRect(GetLocalBounds());
 }
 
-void Animation::Update(sf::Time dt)
+sf::IntRect Animation::Update(float dt)
 {
-	sf::Time timePerFrame = m_duration / static_cast<float>(m_num_frames);
+	float timePerFrame = m_duration / static_cast<float>(m_num_frames);
 	m_elapsed_time += dt;
 
 	sf::Vector2i textureBounds(m_sprite.getTexture()->getSize());
@@ -133,6 +133,7 @@ void Animation::Update(sf::Time dt)
 	}
 
 	m_sprite.setTextureRect(textureRect);
+	return textureRect;
 }
 
 void Animation::draw(sf::RenderTarget& target, sf::RenderStates states) const

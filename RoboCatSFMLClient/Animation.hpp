@@ -14,8 +14,8 @@ public:
 	void SetNumFrames(std::size_t numFrames);
 	std::size_t GetNumFrames() const;
 
-	void SetDuration(sf::Time duration);
-	sf::Time GetDuration() const;
+	void SetDuration(float duration);
+	float GetDuration() const;
 
 	void SetRepeating(bool flag);
 	bool IsRepeating() const;
@@ -26,7 +26,7 @@ public:
 	sf::FloatRect GetLocalBounds() const;
 	sf::FloatRect GetGlobalBounds() const;
 
-	void Update(sf::Time dt);
+	sf::IntRect Update(float dt);
 
 
 private:
@@ -38,8 +38,8 @@ private:
 	sf::Vector2i m_frame_size;
 	std::size_t m_num_frames;
 	std::size_t m_current_frame;
-	sf::Time m_duration;
-	sf::Time m_elapsed_time;
+	float m_duration;
+	float m_elapsed_time;
 	bool m_repeat;
 };
 

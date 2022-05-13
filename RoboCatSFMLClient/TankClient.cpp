@@ -56,6 +56,10 @@ void TankClient::HandleDying()
 {
 	Tank::HandleDying();
 
+	SoundManager::sInstance->Play(ESounds::kTankDeath, GetPosition());
+	auto explosion = GameObjectRegistry::sInstance->CreateGameObject('EXPL');
+	explosion->SetPosition(GetPosition());
+
 	//and if we're local, tell the hud so our health goes away!
 	if (GetPlayerId() == NetworkManagerClient::sInstance->GetPlayerId())
 	{
@@ -131,14 +135,13 @@ void TankClient::Read(InputMemoryBitStream& inInputStream)
 	{
 		ETankEventBitMask mask;
 		inInputStream.Read(mask, 4);
-		if ((mask & ETEB_Pickup) == ETEB_Pickup) SoundManager::sInstance->Play(ESounds::kCollectPickup);
-		if ((mask & ETEB_Shoot) == ETEB_Shoot) SoundManager::sInstance->Play(ESounds::kFire);
+		if ((mask & ETEB_Pickup) == ETEB_Pickup) SoundManager::sInstance->Play(ESounds::kCollectPickup, GetPosition());
+		if ((mask & ETEB_Shoot) == ETEB_Shoot) SoundManager::sInstance->Play(ESounds::kFire, GetPosition());
 		if ((mask & ETEB_Hurt) == ETEB_Hurt)
 		{
-			SoundManager::sInstance->Play(ESounds::kHit);
+			SoundManager::sInstance->Play(ESounds::kHit, GetPosition());
 			hasBeenHit = true;
 		}
-		if ((mask & ETEB_Death) == ETEB_Death) SoundManager::sInstance->Play(ESounds::kTankDeath);
 	}
 
 	if (GetPlayerId() == NetworkManagerClient::sInstance->GetPlayerId())

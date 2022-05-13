@@ -22,6 +22,12 @@ void SpriteComponent::SetTexture(TexturePtr inTexture)
 	m_sprite.setScale(sf::Vector2f(1.f * mGameObject->GetScale(), 1.f * mGameObject->GetScale()));
 }
 
+void SpriteComponent::SetTextureRect(sf::IntRect rect)
+{
+	m_sprite.setTextureRect(rect);
+	m_sprite.setOrigin(rect.width / 2, rect.height / 2);
+}
+
 sf::Sprite& SpriteComponent::GetSprite()
 {
 	// Update the sprite based on the game object stuff.

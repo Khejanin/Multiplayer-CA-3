@@ -29,6 +29,7 @@
     <ClInclude Include="Container.hpp" />
     <ClInclude Include="EShaders.hpp" />
     <ClInclude Include="EState.hpp" />
+    <ClInclude Include="Explosion.hpp" />
     <ClInclude Include="FontManager.hpp" />
     <ClInclude Include="EFonts.hpp" />
     <ClInclude Include="HUD.hpp" />
@@ -71,6 +72,7 @@
     <ClCompile Include="ClientMain.cpp" />
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="Container.cpp" />
+    <ClCompile Include="Explosion.cpp" />
     <ClCompile Include="FontManager.cpp" />
     <ClCompile Include="HUD.cpp" />
     <ClCompile Include="InputManager.cpp" />

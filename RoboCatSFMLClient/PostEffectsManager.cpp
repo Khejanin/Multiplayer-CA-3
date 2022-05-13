@@ -18,7 +18,7 @@ void PostEffectsManager::Update()
 
 void PostEffectsManager::ShakeItBaby()
 {
-	sInstance->mShakeEffectTimer = sInstance->mMaxShakeTimer;
+	//sInstance->mShakeEffectTimer = sInstance->mMaxShakeTimer;
 }
 
 void PostEffectsManager::ApplyPostEffects()

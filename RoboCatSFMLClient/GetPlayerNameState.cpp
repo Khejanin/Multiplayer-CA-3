@@ -20,6 +20,7 @@ GetPlayerNameState::GetPlayerNameState() :
 void GetPlayerNameState::Draw()
 {
 	sf::RenderTexture& tex = *WindowManager::mRenderTexture.get();
+	Utility::CentreOrigin(mInputPreview);
 	tex.draw(mPleasePutNameText);
 	tex.draw(mInputPreview);
 }
@@ -31,6 +32,7 @@ bool GetPlayerNameState::Update(float dt)
 
 bool GetPlayerNameState::HandleEvent(const sf::Event& event)
 {
+	//Helped by Paul & Dylan's codebase
 	if (event.type == sf::Event::TextEntered)
 	{
 		if (event.text.unicode == '\b')

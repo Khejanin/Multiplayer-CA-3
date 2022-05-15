@@ -181,6 +181,19 @@ void NetworkManagerServer::SendStatePacketToClient(ClientProxyPtr inClientProxy)
 	}
 }
 
+void NetworkManagerServer::SendEndgamePacket(int playerID)
+{
+	OutputMemoryBitStream packet;
+
+	packet.Write(kCloseCC);
+	packet.Write(playerID);
+
+	for (const auto& pair : mAddressToClientMap)
+	{
+		SendPacket(packet, pair.second->GetSocketAddress());
+	}
+}
+
 void NetworkManagerServer::WriteLastMoveTimestampIfDirty(OutputMemoryBitStream& inOutputStream, ClientProxyPtr inClientProxy)
 {
 	//first, dirty?

@@ -183,14 +183,14 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\Users\jmagu\Desktop\SFML-2.5.1-windows-vc15-32-bit\SFML-2.5.1\include;D:\DKIT\Multi Player Programming\SFML\SFML-2.5.1\include;..\RoboCatSFML;C:\Users\loanej\dev\SFML-2.5.1\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\jmagu\Desktop\SFML-2.5.1\include;C:\Users\jmagu\Desktop\SFML-2.5.1-windows-vc15-32-bit\SFML-2.5.1\include;D:\DKIT\Multi Player Programming\SFML\SFML-2.5.1\include;..\RoboCatSFML;C:\Users\loanej\dev\SFML-2.5.1\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>RoboCatClientPCH.hpp</PrecompiledHeaderFile>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\Users\jmagu\Desktop\SFML-2.5.1-windows-vc15-32-bit\SFML-2.5.1\lib;D:\DKIT\Multi Player Programming\SFML\SFML-2.5.1\lib;C:\Users\loanej\dev\SFML-2.5.1\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\Users\jmagu\Desktop\SFML-2.5.1\lib;C:\Users\jmagu\Desktop\SFML-2.5.1-windows-vc15-32-bit\SFML-2.5.1\lib;D:\DKIT\Multi Player Programming\SFML\SFML-2.5.1\lib;C:\Users\loanej\dev\SFML-2.5.1\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>ws2_32.lib;sfml-graphics-d.lib;sfml-system-d.lib;sfml-window-d.lib;sfml-audio-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>

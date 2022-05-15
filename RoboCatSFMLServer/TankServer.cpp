@@ -4,7 +4,9 @@ TankServer::TankServer() :
 	mCatControlType(ESCT_Human),
 	mTimeOfNextShot(0.f),
 	mTimeBetweenShots(0.5f),
-	mFireRateTimer(0.f)
+	mFireRateTimer(0.f),
+	mGameTimer(10.f),
+	mGameClosed(false)
 {}
 
 
@@ -34,6 +36,23 @@ void TankServer::Update()
 	if (mDamageTimer > 0)
 	{
 		mDamageTimer-= dt;
+	}
+	
+
+	if (mGameTimer > 0)
+	{
+		mGameTimer -= dt;
+		LOG("%f", mGameTimer);
+	}
+	else
+	{
+		if (!mGameClosed) {
+			NetworkManagerServer::sInstance->SendEndgamePacket(GetPlayerId());
+			mGameClosed = true;
+
+		}
+		
+		
 	}
 
 	Vector3 oldLocation = GetPosition();

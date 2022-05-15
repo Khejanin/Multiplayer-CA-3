@@ -48,6 +48,9 @@ void NetworkManagerClient::ProcessPacket(InputMemoryBitStream& inInputStream, co
 			HandleStatePacket(inInputStream);
 		}
 		break;
+	case kCloseCC:
+		HandleClosePacket(inInputStream);
+		break;
 	}
 }
 
@@ -112,6 +115,11 @@ void NetworkManagerClient::HandleStatePacket(InputMemoryBitStream& inInputStream
 		//tell the replication manager to handle the rest...
 		mReplicationManagerClient.Read(inInputStream);
 	}
+}
+
+void NetworkManagerClient::HandleClosePacket(InputMemoryBitStream& inInputStream)
+{
+	StateStack::sInstance->PushState(EState::kTitle);
 }
 
 void NetworkManagerClient::ReadLastMoveProcessedOnServerTimestamp(InputMemoryBitStream& inInputStream)

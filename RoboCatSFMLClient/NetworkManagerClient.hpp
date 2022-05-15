@@ -29,6 +29,7 @@ private:
 
 	void	HandleWelcomePacket(InputMemoryBitStream& inInputStream);
 	void	HandleStatePacket(InputMemoryBitStream& inInputStream);
+	void	HandleClosePacket(InputMemoryBitStream& inInputStream);
 	void	ReadLastMoveProcessedOnServerTimestamp(InputMemoryBitStream& inInputStream);
 
 	void	HandleGameObjectState(InputMemoryBitStream& inInputStream);

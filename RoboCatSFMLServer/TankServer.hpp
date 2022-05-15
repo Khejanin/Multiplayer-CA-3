@@ -28,4 +28,6 @@ private:
 	float		mTimeBetweenShots;
 	float		mFireRateTimer;
 	float		mDamageTimer;
+	float		mGameTimer;
+	bool		mGameClosed;
 };

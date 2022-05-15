@@ -120,8 +120,9 @@ void NetworkManagerClient::HandleStatePacket(InputMemoryBitStream& inInputStream
 void NetworkManagerClient::HandleClosePacket(InputMemoryBitStream& inInputStream)
 {
 	Client::s_instance->CloseConnection();
-	StateStack::sInstance->PushState(EState::kTitle);
+	Client::s_instance->mShouldReset = true;
 }
+
 
 void NetworkManagerClient::ReadLastMoveProcessedOnServerTimestamp(InputMemoryBitStream& inInputStream)
 {
@@ -196,6 +197,12 @@ void NetworkManagerClient::DestroyGameObjectsInMap(const IntToGameObjectMap& inO
 	}
 
 
+}
+
+void NetworkManagerClient::Reset()
+{
+	Init(mServerAddress, mName);
+	m_network_id_to_game_object_map.clear();
 }
 
 

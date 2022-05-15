@@ -35,12 +35,31 @@ bool Client::StaticInit()
 	return true;
 }
 
-Client::Client()
+Client::Client() : mShouldReset(false)
 {
+}
+
+void Client::Reset()
+{
+	//Thank you to vilandas for his help with the issue i was having where once you were returned to the menu you still retained everything from the previous session
+
+	World::StaticInit();
+	ScoreBoardManager::StaticInit();
+	RenderManager::StaticInit();
+	HUD::StaticInit();
+	NetworkManagerClient::sInstance->Reset();
+
+	StateStack::sInstance->ClearStates();
+	StateStack::sInstance->PushState(EState::kMenu);
 }
 
 void Client::DoFrame()
 {
+	if (mShouldReset) {
+		mShouldReset = false;
+		Reset();
+	}
+
 	InputManager::sInstance->Update();
 
 	Engine::DoFrame();

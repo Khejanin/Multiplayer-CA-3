@@ -32,6 +32,7 @@
     <ClInclude Include="Explosion.hpp" />
     <ClInclude Include="FontManager.hpp" />
     <ClInclude Include="EFonts.hpp" />
+    <ClInclude Include="GetPlayerNameState.hpp" />
     <ClInclude Include="HUD.hpp" />
     <ClInclude Include="InputManager.hpp" />
     <ClInclude Include="MenuState.hpp" />
@@ -74,6 +75,7 @@
     <ClCompile Include="Container.cpp" />
     <ClCompile Include="Explosion.cpp" />
     <ClCompile Include="FontManager.cpp" />
+    <ClCompile Include="GetPlayerNameState.cpp" />
     <ClCompile Include="HUD.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="MenuState.cpp" />

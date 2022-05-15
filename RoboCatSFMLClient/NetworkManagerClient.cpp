@@ -119,6 +119,7 @@ void NetworkManagerClient::HandleStatePacket(InputMemoryBitStream& inInputStream
 
 void NetworkManagerClient::HandleClosePacket(InputMemoryBitStream& inInputStream)
 {
+	Client::s_instance->CloseConnection();
 	StateStack::sInstance->PushState(EState::kTitle);
 }
 

@@ -23,7 +23,14 @@ bool Client::StaticInit()
 
 	RegisterStates();
 
-	StateStack::sInstance->PushState(EState::kTitle);
+	if(LoadPlayerName())
+	{
+		StateStack::sInstance->PushState(EState::kTitle);
+	}
+	else 
+	{
+		StateStack::sInstance->PushState(EState::kGetName);
+	}
 
 	return true;
 }
@@ -80,11 +87,10 @@ void Client::EstablishConnection()
 	GameObjectRegistry::sInstance->RegisterCreationFunction('EXPL', Explosion::StaticCreate);
 
 	string destination = StringUtils::GetCommandLineArg(1);
-	string name = StringUtils::GetCommandLineArg(2);
 
 	SocketAddressPtr serverAddress = SocketAddressFactory::CreateIPv4FromString(destination);
 
-	NetworkManagerClient::StaticInit(*serverAddress, name);
+	NetworkManagerClient::StaticInit(*serverAddress, s_instance->mPlayerName);
 
 	is_connected = true;
 }
@@ -99,4 +105,32 @@ void Client::RegisterStates()
 	StateStack::sInstance->RegisterState<TitleState>(EState::kTitle);
 	StateStack::sInstance->RegisterState<MenuState>(EState::kMenu);
 	StateStack::sInstance->RegisterState<MultiplayerGameState>(EState::kJoinGame);
+	StateStack::sInstance->RegisterState<GetPlayerNameState>(EState::kGetName);
+}
+
+bool Client::LoadPlayerName()
+{
+	{
+		std::ifstream input_file("name.txt");
+		std::string name;
+		if(input_file >> name)
+		{
+			s_instance->mPlayerName = name;
+			return true;
+		}
+	}
+	return false;
+}
+
+string Client::GetPlayerName()
+{
+	return s_instance->mPlayerName;
+}
+
+void Client::SetPlayerName(string name)
+{
+	std::ofstream output_file("name.txt");
+	output_file << name;
+	output_file.close();
+	s_instance->mPlayerName = name;
 }

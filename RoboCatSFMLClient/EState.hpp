@@ -11,5 +11,6 @@ enum class EState
 	kNetworkPause,
 	kMissionSuccess,
 	kHostGame,
-	kJoinGame
+	kJoinGame,
+	kGetName
 };

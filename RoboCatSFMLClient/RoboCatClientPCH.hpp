@@ -6,6 +6,8 @@
 //Utility depends on Animation
 #include "Utility.hpp"
 
+#include "fstream"
+
 //Enums
 #include "ETextures.hpp"
 #include "ESounds.hpp"
@@ -55,6 +57,7 @@
 #include "TitleState.hpp"
 #include "MenuState.hpp"
 #include "MultiplayerGameState.hpp"
+#include "GetPlayerNameState.hpp"
 
 #include "ReplicationManagerClient.hpp"
 #include "NetworkManagerClient.hpp"

@@ -6,6 +6,9 @@ public:
 
 	virtual void	EstablishConnection();
 	virtual void	CloseConnection();
+	static  void	SetPlayerName(string name);
+	static  bool	LoadPlayerName();
+	static  string	GetPlayerName();
 protected:
 
 	Client();
@@ -17,4 +20,5 @@ protected:
 
 private:
 	bool is_connected = false;
+	string mPlayerName;
 };

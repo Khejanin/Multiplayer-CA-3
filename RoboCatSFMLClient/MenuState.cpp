@@ -1,12 +1,12 @@
 #include "RoboCatClientPCH.hpp"
 
 MenuState::MenuState()
-: State()
+	: State()
 {
 	sf::Texture& texture = *TextureManager::sInstance->GetTexture(ETextures::kTitleScreen);
 
 	m_background_sprite.setTexture(texture);
-
+	int i = 0;
 	auto join_play_button = std::make_shared<GUI::Button>();
 	join_play_button->setPosition(100, 300);
 	join_play_button->SetText("Join");
@@ -16,24 +16,29 @@ MenuState::MenuState()
 		RequestStackPush(EState::kJoinGame);
 	});
 
-	auto settings_button = std::make_shared<GUI::Button>();
-	settings_button->setPosition(100, 350);
-	settings_button->SetText("Settings");
-	settings_button->SetCallback([this]()
+	i++;
+
+	auto changename_button = std::make_shared<GUI::Button>();
+	changename_button->setPosition(100, 300 + i * 50);
+	changename_button->SetText("Change Name");
+	changename_button->SetCallback([this]()
 	{
-		RequestStackPush(EState::kSettings);
+		RequestStackPop();
+		RequestStackPush(EState::kGetName);
 	});
 
+	i++;
+
 	auto exit_button = std::make_shared<GUI::Button>();
-	exit_button->setPosition(100, 400);
+	exit_button->setPosition(100, 300 + i * 50);
 	exit_button->SetText("Exit");
 	exit_button->SetCallback([this]()
 	{
-		RequestStackPop();
+		Client::s_instance->SetShouldKeepRunning(false);
 	});
 
 	m_gui_container.Pack(join_play_button);
-	m_gui_container.Pack(settings_button);
+	m_gui_container.Pack(changename_button);
 	m_gui_container.Pack(exit_button);
 
 	// Play menu theme
@@ -58,4 +63,3 @@ bool MenuState::HandleEvent(const sf::Event& event)
 	m_gui_container.HandleEvent(event);
 	return false;
 }
-

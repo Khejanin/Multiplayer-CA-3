@@ -20,6 +20,8 @@ public:
 	float									GetRoundTripTime()		const { return mAvgRoundTripTime.GetValue(); }
 	int		GetPlayerId()											const { return mPlayerId; }
 	float	GetLastMoveProcessedByServerTimestamp()					const { return mLastMoveProcessedByServerTimestamp; }
+
+	void    Reset();
 private:
 	NetworkManagerClient();
 	void Init(const SocketAddress& inServerAddress, const string& inName);
@@ -30,6 +32,7 @@ private:
 	void	HandleWelcomePacket(InputMemoryBitStream& inInputStream);
 	void	HandleStatePacket(InputMemoryBitStream& inInputStream);
 	void	HandleClosePacket(InputMemoryBitStream& inInputStream);
+	
 	void	ReadLastMoveProcessedOnServerTimestamp(InputMemoryBitStream& inInputStream);
 
 	void	HandleGameObjectState(InputMemoryBitStream& inInputStream);

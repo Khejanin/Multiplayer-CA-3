@@ -5,7 +5,7 @@ TankServer::TankServer() :
 	mTimeOfNextShot(0.f),
 	mTimeBetweenShots(0.5f),
 	mFireRateTimer(0.f),
-	mGameTimer(10.f),
+	mGameTimer(120.f),
 	mGameClosed(false)
 {}
 
